@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  font-family: 'DotGothic16', 'Press Start 2P', monospace;
+  background-color: #0f141c;
+  background-image: 
+    linear-gradient(rgba(15, 20, 28, 0.95), rgba(15, 20, 28, 0.95)),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.3) 2px, rgba(0, 0, 0, 0.3) 4px);
+  color: #f1f5f9;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* 掌機主外殼 */
+.gameboy-chassis {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #252830;
+  padding: 16px;
+  border-radius: 12px;
+  border: 4px solid #121418;
+  box-shadow: 0 12px 0 0 #090a0c;
+}
+
+/* 掌機頂部裝飾指示燈 */
+.chassis-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 8px 4px;
+}
+
+.battery-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.battery-led {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  border: 1px solid #000;
+  animation: pulseLed 1.5s infinite;
+}
+
+.battery-text {
+  font-size: 10px;
+  color: #a1a1aa;
+  letter-spacing: 1px;
+}
+
+.mode-badge {
+  font-size: 11px;
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+/* 內部 CRT 螢幕容器 */
+.screen-container {
+  position: relative;
+  background-color: #1b261b;
+  border: 4px solid #000;
+  padding: 16px;
+  border-radius: 4px;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #a3d977;
+  overflow: hidden;
+}
+
+/* 螢幕 CRT 掃描線光柵效果 */
+.screen-container::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* 遊戲抬頭標題區 */
+.game-header {
+  border-bottom: 2px dashed #557a3e;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.game-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #d4f88d;
+}
+
+.sub-header {
+  font-size: 11px;
+  color: #7ca85c;
+  margin-top: 4px;
+}
+
+/* 像素數值面板 */
+.stats-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  background-color: #131d13;
+  padding: 8px;
+  border: 2px solid #3d592b;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.stat-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e2e1e;
+  padding: 4px 8px;
+  border: 1px solid #3d592b;
+}
+
+.stat-physique { color: #f87171; }
+.stat-intellect { color: #67e8f9; }
+.stat-charm { color: #fcd34d; }
+.stat-happiness { color: #6ee7b7; }
+.stat-val { font-weight: bold; color: #fff; }
+
+/* 主內容展示區 */
+.main-canvas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 像素立體按鈕 */
+.pixel-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 3px solid #000;
+  box-shadow: 
+    inset 2px 2px 0px #fff,
+    inset -2px -2px 0px #374151,
+    0 4px 0 0 #000;
+  background-color: #25361d;
+  color: #e8ffd1;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: transform 0.05s ease, background-color 0.1s;
+}
+
+.pixel-btn:hover {
+  background-color: #3e592f;
+}
+
+.pixel-btn:active {
+  transform: translateY(4px);
+  box-shadow: 
+    inset 2px 2px 0px #374151,
+    inset -2px -2px 0px #fff,
+    0 0 0 0 #000;
+}
+
+/* 卡片與文字描述框 */
+.dialog-box {
+  background-color: #121c12;
+  border: 2px solid #3d592b;
+  padding: 10px;
+  font-size: 12px;
+  color: #b5e68d;
+  line-height: 1.6;
+  margin: 6px 0 10px 0;
+}
+
+.tag-badge {
+  display: inline-block;
+  background-color: #24351b;
+  border: 1px solid #557a3e;
+  color: #d4f88d;
+  font-size: 10px;
+  padding: 2px 6px;
+  font-weight: bold;
+}
+
+.log-scroll-area {
+  max-height: 110px;
+  overflow-y: auto;
+  font-size: 11px;
+  color: #9fcb7f;
+  background: #121c12;
+  padding: 8px;
+  border: 1px solid #3d592b;
+  margin-top: 8px;
+}
+
+.log-item {
+  border-left: 2px solid #557a3e;
+  padding-left: 6px;
+  margin-bottom: 4px;
+}
+
+/* 底部操作提示 */
+.game-footer {
+  border-top: 2px dashed #557a3e;
+  padding-top: 8px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #7ca85c;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes pulseLed {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
