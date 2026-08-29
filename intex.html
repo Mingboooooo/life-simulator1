@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>如果人生：8-BIT 寫實人生模擬器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="gameboy-chassis">
+    <!-- 頂部掌機指示燈 -->
+    <div class="chassis-header">
+      <div class="battery-status">
+        <div class="battery-led"></div>
+        <span class="battery-text">BATTERY [OK]</span>
+      </div>
+      <div class="mode-badge">GAME BOY MODE</div>
+    </div>
+
+    <!-- 螢幕視窗 -->
+    <div class="screen-container">
+      <div>
+        <header class="game-header">
+          <h1 class="game-title">▶ 如果人生 8-BIT ◀</h1>
+          <p id="sub-header" class="sub-header">PRESS START TO PLAY</p>
+        </header>
+
+        <!-- 數值面板（由 script.js 動態填入 5 大屬性） -->
+        <div id="stats-panel" class="stats-panel hidden"></div>
+      </div>
+
+      <!-- 畫面動態內容渲染區 -->
+      <main id="game-canvas" class="main-canvas"></main>
+
+      <!-- 底部指令提示 -->
+      <footer class="game-footer">
+        <span>[A] 確定 / 選擇</span>
+        <span>SELECT ▼</span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
