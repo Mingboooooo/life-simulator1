@@ -277,27 +277,44 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
 }
 
-/* ================= 3D 爆裂抽天賦卡 ================= */
+/* ================= 3D 爆裂抽天賦卡（手機完美兼容版） ================= */
 .gacha-screen-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(15, 12, 24, 0.95);
+  background: rgba(15, 12, 24, 0.96);
   backdrop-filter: blur(14px);
   z-index: 999999;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  justify-content: space-between;
+  padding: 16px 16px 24px 16px;
+  overflow-y: auto;
+}
+
+.gacha-title-banner {
+  text-align: center;
+  margin-top: 10px;
+  flex-shrink: 0;
 }
 
 .gacha-cards-stage {
-  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-  gap: 14px; max-width: 900px; width: 100%; perspective: 1200px;
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  align-items: center;
+  gap: 10px; 
+  max-width: 900px; 
+  width: 100%;
+  max-height: 58vh;
+  overflow-y: auto;
+  padding: 10px 4px;
+  perspective: 1200px;
+  flex-grow: 1;
 }
 
 .gacha-card-item {
-  position: relative; width: 150px; height: 220px; border-radius: 14px;
+  position: relative; width: 140px; height: 200px; border-radius: 12px;
   cursor: pointer; transform-style: preserve-3d;
   transition: transform 0.3s ease;
   animation: cardBurstOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
@@ -310,32 +327,43 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 .gacha-card-item:nth-child(5) { animation-delay: 0.5s; }
 
 .gacha-card-inner {
-  position: absolute; width: 100%; height: 100%; border-radius: 14px;
-  background: #252230; border: 2px solid #544b68; padding: 12px 10px;
+  position: absolute; width: 100%; height: 100%; border-radius: 12px;
+  background: #252230; border: 2px solid #544b68; padding: 10px 8px;
   display: flex; flex-direction: column; justify-content: space-between;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-.gacha-card-item:hover { transform: translateY(-6px) scale(1.03); }
-.gacha-card-item.selected { transform: translateY(-10px) scale(1.06); }
+.gacha-card-item:hover { transform: translateY(-4px) scale(1.02); }
+.gacha-card-item.selected { transform: translateY(-8px) scale(1.05); }
 .gacha-card-item.selected .gacha-card-inner {
   background: #342838; border: 2.5px solid #ff758f;
-  box-shadow: 0 0 25px rgba(255, 117, 143, 0.7);
+  box-shadow: 0 0 20px rgba(255, 117, 143, 0.7);
 }
 
-.gacha-card-icon { font-size: 32px; text-align: center; }
-.gacha-card-name { font-size: 13.5px; font-weight: 900; color: #fff; text-align: center; }
-.gacha-card-desc { font-size: 10px; color: #c9c3b8; line-height: 1.4; text-align: center; }
+.gacha-card-icon { font-size: 28px; text-align: center; }
+.gacha-card-name { font-size: 12.5px; font-weight: 900; color: #fff; text-align: center; }
+.gacha-card-desc { font-size: 9.5px; color: #c9c3b8; line-height: 1.35; text-align: center; }
 .gacha-card-status {
-  font-size: 9.5px; text-align: center; font-weight: bold; color: #8c829e;
-  border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 5px;
+  font-size: 9px; text-align: center; font-weight: bold; color: #8c829e;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 4px;
 }
 .gacha-card-item.selected .gacha-card-status { color: #ff758f; }
 
 .gacha-confirm-btn {
-  margin-top: 22px; background: #f7e6c4; color: #211c2e; border: none;
-  border-radius: 25px; padding: 12px 36px; font-size: 13px; font-weight: 900;
-  cursor: pointer; box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
+  flex-shrink: 0;
+  margin-top: 12px;
+  margin-bottom: 10px;
+  background: #f7e6c4; 
+  color: #211c2e; 
+  border: none;
+  border-radius: 25px; 
+  padding: 12px 32px; 
+  font-size: 13px; 
+  font-weight: 900;
+  cursor: pointer; 
+  box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
+  width: 100%;
+  max-width: 320px;
 }
 
 /* ================= 歷史重大危機飛入衝擊動畫 ================= */
@@ -453,7 +481,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   overflow: hidden;
 }
 
-/* 稱號專屬插圖展示框 */
 .ending-art-box {
   width: 90px;
   height: 90px;
@@ -500,7 +527,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   margin-bottom: 14px;
 }
 
-/* 紅色復古印章壓蓋動畫 (STAMP SLAM) */
 .ending-stamp {
   position: absolute;
   top: 20px;
@@ -521,7 +547,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   animation: stampSlam 0.4s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
 }
 
-/* 紀念冊圖鑑列表插圖樣式 */
 .hof-item-art {
   width: 44px;
   height: 44px;
@@ -535,7 +560,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   flex-shrink: 0;
 }
 
-/* 人生圖鑑紀念冊 */
 .hall-of-fame-modal {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
@@ -552,7 +576,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   padding: 10px 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px;
 }
 
-/* 動畫設定 */
 @keyframes overlayDimIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes cardBurstOut {
   0% { opacity: 0; transform: scale(0.2) rotateY(180deg) translateY(200px); }
@@ -564,7 +587,7 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 @keyframes crisisCardFlyIn {
   0% { opacity: 0; transform: scale(0.1) translateY(120px) rotate(-4deg); }
   75% { transform: scale(1.06) translateY(-8px) rotate(1deg); }
-  100% { opacity: 1; transform: scale(1) rotateY(0deg) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
 }
 
 @keyframes crisisHeartbeat {
@@ -585,99 +608,4 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 @keyframes artPulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-}
-
-/* ================= 3D 爆裂抽天賦卡（手機完美兼容版） ================= */
-.gacha-screen-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(15, 12, 24, 0.96);
-  backdrop-filter: blur(14px);
-  z-index: 999999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between; /* 上中下完美分配空間 */
-  padding: 16px 16px 24px 16px;
-  overflow-y: auto; /* 確保整個畫面在極小手機也能滾動 */
-}
-
-.gacha-title-banner {
-  text-align: center;
-  margin-top: 10px;
-  flex-shrink: 0;
-}
-
-/* 卡牌滾動容器：手機高度不足時內部滾動，按鈕絕不被擠走 */
-.gacha-cards-stage {
-  display: flex; 
-  flex-wrap: wrap; 
-  justify-content: center; 
-  align-items: center;
-  gap: 10px; 
-  max-width: 900px; 
-  width: 100%;
-  max-height: 58vh; /* 限制最大高度 */
-  overflow-y: auto;  /* 手機螢幕太矮時卡牌區可內部滑動 */
-  padding: 10px 4px;
-  perspective: 1200px;
-  flex-grow: 1;
-}
-
-.gacha-card-item {
-  position: relative; 
-  width: 140px; 
-  height: 200px; 
-  border-radius: 12px;
-  cursor: pointer; 
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease;
-  animation: cardBurstOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-}
-
-.gacha-card-item:nth-child(1) { animation-delay: 0.1s; }
-.gacha-card-item:nth-child(2) { animation-delay: 0.2s; }
-.gacha-card-item:nth-child(3) { animation-delay: 0.3s; }
-.gacha-card-item:nth-child(4) { animation-delay: 0.4s; }
-.gacha-card-item:nth-child(5) { animation-delay: 0.5s; }
-
-.gacha-card-inner {
-  position: absolute; width: 100%; height: 100%; border-radius: 12px;
-  background: #252230; border: 2px solid #544b68; padding: 10px 8px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-}
-
-.gacha-card-item:hover { transform: translateY(-4px) scale(1.02); }
-.gacha-card-item.selected { transform: translateY(-8px) scale(1.05); }
-.gacha-card-item.selected .gacha-card-inner {
-  background: #342838; border: 2.5px solid #ff758f;
-  box-shadow: 0 0 20px rgba(255, 117, 143, 0.7);
-}
-
-.gacha-card-icon { font-size: 28px; text-align: center; }
-.gacha-card-name { font-size: 12.5px; font-weight: 900; color: #fff; text-align: center; }
-.gacha-card-desc { font-size: 9.5px; color: #c9c3b8; line-height: 1.35; text-align: center; }
-.gacha-card-status {
-  font-size: 9px; text-align: center; font-weight: bold; color: #8c829e;
-  border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 4px;
-}
-.gacha-card-item.selected .gacha-card-status { color: #ff758f; }
-
-/* 底部確認按鈕：固定在底部，絕不收埋 */
-.gacha-confirm-btn {
-  flex-shrink: 0;
-  margin-top: 12px;
-  margin-bottom: 10px;
-  background: #f7e6c4; 
-  color: #211c2e; 
-  border: none;
-  border-radius: 25px; 
-  padding: 12px 32px; 
-  font-size: 13px; 
-  font-weight: 900;
-  cursor: pointer; 
-  box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
-  width: 100%;
-  max-width: 320px;
 }
