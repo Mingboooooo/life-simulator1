@@ -8,38 +8,38 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* 最外層環境背景：日系暖木、燕麥紙質手感，告別死黑 */
 body {
-  /* 日系溫潤圓體與點陣字體搭配 */
   font-family: 'Zen Maru Gothic', 'DotGothic16', sans-serif;
-  background-color: #1e222d;
+  background-color: #d8d2c4;
   background-image: 
-    radial-gradient(circle at 50% 15%, rgba(240, 235, 225, 0.08), transparent 50%),
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 3px);
-  color: #2b2e38;
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(184, 172, 154, 0.3), transparent 50%),
+    linear-gradient(135deg, rgba(245, 240, 230, 0.6) 0%, rgba(216, 210, 196, 0.9) 100%);
+  color: #2c2f35;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
-  transition: background 0.8s ease;
 }
 
-/* 復古日系米白色掌機機身 (90-00s 日本任天堂/WonderSwan 啞光磨砂感) */
+/* 遊戲機本體：低飽和燕麥灰褐 + 橄欖墨綠日系配色 */
 .gameboy-chassis {
   position: relative;
   width: 100%;
   max-width: 440px;
-  background: #ece8df;
+  background: #bfb7a6; /* 燕麥灰褐，帶厚度質感 */
   padding: 18px;
-  border-radius: 20px;
-  border: 4px solid #363b47;
+  border-radius: 22px;
+  border: 4px solid #4a483e; /* 炭深灰褐外框 */
   box-shadow: 
-    0 12px 0 0 #20242e,
-    0 20px 25px rgba(0, 0, 0, 0.3),
-    inset 0 2px 0 rgba(255, 255, 255, 0.8);
+    0 14px 0 0 #3a372f,
+    0 22px 30px rgba(45, 40, 30, 0.25),
+    inset 0 2px 3px rgba(255, 255, 255, 0.45);
 }
 
-/* 機身頂部：電源燈與音響透氣孔裝飾 */
+/* 機身頂部飾條 */
 .chassis-header {
   display: flex;
   align-items: center;
@@ -57,60 +57,60 @@ body {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background-color: #e06c53;
-  border: 1.5px solid #363b47;
+  background-color: #c85a44;
+  border: 1.5px solid #4a483e;
 }
 
 .battery-text {
   font-size: 10px;
-  color: #6d7382;
+  color: #595547;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 .mode-badge {
   font-size: 11px;
-  color: #4a5568;
+  color: #4a483e;
   font-weight: 900;
   letter-spacing: 0.5px;
 }
 
-/* 螢幕外框與日系高解析度內液晶 */
+/* 液晶內螢幕（清爽護眼柔光和紙感） */
 .screen-container {
   position: relative;
-  background: #fdfbf7;
-  border: 3px solid #363b47;
+  background: #fbf9f4;
+  border: 3px solid #4a483e;
   padding: 16px;
-  border-radius: 10px;
+  border-radius: 12px;
   min-height: 560px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.08);
-  transition: all 0.6s ease;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.06);
+  transition: background 0.6s ease, border-color 0.6s ease;
 }
 
-/* === 動態季節光暈氛圍 (由 JS 動態切換 class) === */
+/* === 四季動態微光 === */
 .season-spring {
-  background: linear-gradient(180deg, #fff7f9 0%, #fdfbf7 100%);
-  border-color: #d898a8;
+  background: linear-gradient(180deg, #fff5f6 0%, #fbf9f4 100%);
+  border-color: #c98094;
 }
 .season-summer {
-  background: linear-gradient(180deg, #f4faf6 0%, #fdfbf7 100%);
-  border-color: #78a890;
+  background: linear-gradient(180deg, #f2f8f4 0%, #fbf9f4 100%);
+  border-color: #5e8c74;
 }
 .season-autumn {
-  background: linear-gradient(180deg, #fcf7ed 0%, #fdfbf7 100%);
-  border-color: #c98a58;
+  background: linear-gradient(180deg, #fcf5ea 0%, #fbf9f4 100%);
+  border-color: #b57a46;
 }
 .season-winter {
-  background: linear-gradient(180deg, #f2f7fc 0%, #fdfbf7 100%);
-  border-color: #7b9ab8;
+  background: linear-gradient(180deg, #f0f5fa 0%, #fbf9f4 100%);
+  border-color: #6e8fae;
 }
 
 /* 標題欄 */
 .game-header {
-  border-bottom: 2px dashed #d1cbbd;
+  border-bottom: 2px dashed #cfc7b4;
   padding-bottom: 8px;
   margin-bottom: 12px;
   text-align: center;
@@ -119,26 +119,26 @@ body {
 .game-title {
   font-size: 16px;
   font-weight: 900;
-  color: #2d3748;
+  color: #3b3930;
   letter-spacing: 1px;
 }
 
 .sub-header {
   font-size: 11px;
-  color: #718096;
+  color: #706b5d;
   margin-top: 4px;
   font-weight: 700;
 }
 
-/* 5 大數值面板（日系低飽和文青色板） */
+/* 數值面板：大地麻布色塊與清晰卡片 */
 .stats-panel {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  background: #f3eee3;
+  background: #ebe5d7;
   padding: 10px;
   border-radius: 8px;
-  border: 2px solid #dfd8c8;
+  border: 2px solid #d4cbb8;
   margin-bottom: 12px;
 }
 
@@ -146,115 +146,115 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff;
+  background: #fbf9f4;
   padding: 6px 10px;
   border-radius: 6px;
-  border: 1px solid #d8d1c0;
+  border: 1px solid #cfc7b4;
   font-size: 12px;
   font-weight: 700;
 }
 
-.stat-physique { color: #d96b52; }  /* 絳紅 */
-.stat-intellect { color: #437f97; } /* 藍灰 */
-.stat-charm { color: #b86b88; }     /* 櫻木 */
-.stat-happiness { color: #5a9367; } /* 若竹綠 */
-.stat-val { font-weight: 900; color: #2d3748; }
+.stat-physique { color: #c4573f; }  /* 陶土紅 */
+.stat-intellect { color: #3c7287; } /* 黛藍 */
+.stat-charm { color: #a45a75; }     /* 枯野櫻 */
+.stat-happiness { color: #4e805a; } /* 苔綠 */
+.stat-val { font-weight: 900; color: #3b3930; }
 
-/* 標籤徽章 */
+/* 標籤小徽章 */
 .tag-badge {
   display: inline-block;
-  background: #4a5568;
+  background: #595547;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 4px;
 }
 
-/* 季節心情氛圍小標籤 */
+/* 季節小圓標 */
 .season-tag {
   display: inline-block;
   font-size: 10px;
   font-weight: 900;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 12px;
   border: 1px solid currentColor;
 }
 
-/* 日式白底對話框 */
+/* 對話與事件內容區 */
 .dialog-box {
   background: #ffffff;
-  border: 2px solid #dcd5c5;
+  border: 2px solid #d4cbb8;
   border-radius: 8px;
   padding: 12px 14px;
   font-size: 13.5px;
-  color: #2d3748;
+  color: #3b3930;
   line-height: 1.7;
   margin: 8px 0 12px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 5px rgba(50, 45, 35, 0.04);
 }
 
-/* 復古立體溫潤按鈕 */
+/* 復古立體按鈕：耐看的森林橄欖微深色底 + 實體按壓反饋 */
 .pixel-btn {
   position: relative;
   display: block;
   width: 100%;
   text-align: left;
-  border: 2px solid #4a5568;
+  border: 2px solid #4a483e;
   border-radius: 8px;
-  background: #ffffff;
-  color: #2d3748;
+  background: #f4f0e6;
+  color: #3b3930;
   padding: 11px 13px;
   font-size: 12.5px;
   font-family: inherit;
   font-weight: 700;
   cursor: pointer;
   margin-bottom: 8px;
-  box-shadow: 0 3px 0 0 #4a5568;
+  box-shadow: 0 3px 0 0 #4a483e;
   transition: all 0.08s ease;
   line-height: 1.5;
 }
 
 .pixel-btn:hover {
-  background: #f7f5f0;
+  background: #ebe4d3;
   transform: translateY(-1px);
 }
 
 .pixel-btn:active {
   transform: translateY(3px);
-  box-shadow: 0 0 0 0 #4a5568;
+  box-shadow: 0 0 0 0 #4a483e;
 }
 
-/* 歷史回顧滑動區 */
+/* 軌跡記錄框 */
 .log-scroll-area {
   max-height: 130px;
   overflow-y: auto;
   font-size: 12px;
-  color: #4a5568;
-  background: #fbf9f4;
+  color: #595547;
+  background: #f4f0e6;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #dcd5c5;
+  border: 1px solid #d4cbb8;
   margin-top: 10px;
   line-height: 1.6;
 }
 
 .log-item {
-  border-left: 3px solid #b8a898;
+  border-left: 3px solid #8e8876;
   padding-left: 8px;
   margin-bottom: 5px;
 }
 
 /* 底部操作條 */
 .game-footer {
-  border-top: 2px dashed #d1cbbd;
+  border-top: 2px dashed #cfc7b4;
   padding-top: 10px;
   margin-top: 12px;
   display: flex;
   justify-content: space-between;
   font-size: 10.5px;
   font-weight: 700;
-  color: #718096;
+  color: #706b5d;
 }
 
 .hidden {
