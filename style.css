@@ -134,7 +134,7 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   font-size: 13px;
   color: #2c2f35;
   line-height: 1.7;
-  margin: 8px 0 12px 0;
+  margin: 8px 0 10px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
 }
 
@@ -145,17 +145,17 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   text-align: left;
   border-radius: 8px;
   color: #2c2f35;
-  padding: 10px 12px;
-  font-size: 12px;
+  padding: 9px 11px;
+  font-size: 11.5px;
   font-family: inherit;
   font-weight: 700;
   cursor: pointer;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
   transition: all 0.08s ease;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
-.pixel-btn:active { transform: translateY(3px); box-shadow: 0 0 0 0 !important; }
+.pixel-btn:active { transform: translateY(2px); box-shadow: 0 0 0 0 !important; }
 
 .log-scroll-area {
   max-height: 120px;
@@ -182,26 +182,32 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   color: #666;
 }
 
-.locked-opt-compact {
-  font-size: 11px;
-  color: #a09a8e;
-  border: 1px dashed #cfc7b4 !important;
-  background: rgba(0, 0, 0, 0.02) !important;
-  padding: 6px 10px !important;
-  margin-bottom: 6px !important;
-  cursor: not-allowed !important;
-  opacity: 0.7;
-}
-
 .hidden { display: none !important; }
 
-/* ==========================================================
-   🎲 命運輪盤滾動選國度動畫 (SLOT REVEAL ANIMATION)
-========================================================== */
+/* 國旗圖像樣式 */
+.flag-img {
+  width: 38px;
+  height: 26px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 6px;
+}
+
+.flag-img-small {
+  width: 16px;
+  height: 11px;
+  object-fit: cover;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* ================= 輪盤選國度動畫 ================= */
 .roulette-screen-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(14, 11, 22, 0.95);
+  background: rgba(14, 11, 22, 0.96);
   backdrop-filter: blur(14px);
   z-index: 999999;
   display: flex;
@@ -209,26 +215,12 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   align-items: center;
   justify-content: center;
   padding: 20px;
-  animation: overlayDimIn 0.4s ease forwards;
+  animation: overlayDimIn 0.3s ease forwards;
 }
 
-.roulette-title {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.roulette-title h2 {
-  font-size: 20px;
-  color: #f7e6c4;
-  letter-spacing: 2px;
-  text-shadow: 0 0 16px rgba(247, 230, 196, 0.5);
-  margin-bottom: 6px;
-}
-
-.roulette-title p {
-  font-size: 12px;
-  color: #a89f91;
-}
+.roulette-title { text-align: center; margin-bottom: 24px; }
+.roulette-title h2 { font-size: 20px; color: #f7e6c4; letter-spacing: 2px; margin-bottom: 6px; }
+.roulette-title p { font-size: 12px; color: #a89f91; }
 
 .country-grid-stage {
   display: grid;
@@ -242,46 +234,34 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   background: #252230;
   border: 2px solid #544b68;
   border-radius: 12px;
-  padding: 14px 12px;
+  padding: 14px 10px;
   text-align: center;
-  transition: all 0.12s ease;
-  opacity: 0.6;
+  transition: all 0.1s ease;
+  opacity: 0.45;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.country-box .flag {
-  font-size: 32px;
-  margin-bottom: 6px;
-}
+.country-box .name { font-size: 13.5px; font-weight: 900; color: #ffffff; }
+.country-box .desc { font-size: 10px; color: #a89f91; margin-top: 4px; line-height: 1.35; }
 
-.country-box .name {
-  font-size: 14px;
-  font-weight: 900;
-  color: #ffffff;
-}
-
-.country-box .desc {
-  font-size: 10.5px;
-  color: #a89f91;
-  margin-top: 4px;
-  line-height: 1.4;
-}
-
-/* 閃爍高亮中 */
+/* 閃爍中 */
 .country-box.active-flash {
-  opacity: 1;
-  border-color: #ffd166;
-  background: #3c3246;
+  opacity: 1 !important;
+  border-color: #ffd166 !important;
+  background: #3c3246 !important;
   transform: scale(1.04);
-  box-shadow: 0 0 20px rgba(255, 209, 102, 0.5);
+  box-shadow: 0 0 20px rgba(255, 209, 102, 0.6);
 }
 
-/* 最終鎖定定格 */
+/* 最終鎖定定格（單一獨佔） */
 .country-box.final-locked {
-  opacity: 1;
-  border: 3px solid #ff758f;
-  background: #442a3a;
+  opacity: 1 !important;
+  border: 3px solid #ff758f !important;
+  background: #4a283e !important;
   transform: scale(1.08);
-  box-shadow: 0 0 30px rgba(255, 117, 143, 0.8);
+  box-shadow: 0 0 35px rgba(255, 117, 143, 0.9) !important;
 }
 
 .roulette-proceed-btn {
@@ -295,14 +275,13 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   font-weight: 900;
   cursor: pointer;
   box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
-  transition: all 0.2s ease;
 }
 
-/* ================= 3D 爆裂抽卡 ================= */
+/* ================= 3D 爆裂抽天賦卡 ================= */
 .gacha-screen-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(15, 12, 24, 0.94);
+  background: rgba(15, 12, 24, 0.95);
   backdrop-filter: blur(14px);
   z-index: 999999;
   display: flex;
@@ -314,14 +293,14 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 
 .gacha-cards-stage {
   display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-  gap: 16px; max-width: 900px; width: 100%; perspective: 1200px;
+  gap: 14px; max-width: 900px; width: 100%; perspective: 1200px;
 }
 
 .gacha-card-item {
-  position: relative; width: 155px; height: 230px; border-radius: 14px;
+  position: relative; width: 150px; height: 220px; border-radius: 14px;
   cursor: pointer; transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  animation: cardBurstOut 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  transition: transform 0.3s ease;
+  animation: cardBurstOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
 .gacha-card-item:nth-child(1) { animation-delay: 0.1s; }
@@ -332,31 +311,119 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 
 .gacha-card-inner {
   position: absolute; width: 100%; height: 100%; border-radius: 14px;
-  background: #252230; border: 2px solid #544b68; padding: 14px 12px;
+  background: #252230; border: 2px solid #544b68; padding: 12px 10px;
   display: flex; flex-direction: column; justify-content: space-between;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-.gacha-card-item:hover { transform: translateY(-8px) scale(1.04); }
-.gacha-card-item.selected { transform: translateY(-12px) scale(1.08); }
+.gacha-card-item:hover { transform: translateY(-6px) scale(1.03); }
+.gacha-card-item.selected { transform: translateY(-10px) scale(1.06); }
 .gacha-card-item.selected .gacha-card-inner {
   background: #342838; border: 2.5px solid #ff758f;
   box-shadow: 0 0 25px rgba(255, 117, 143, 0.7);
 }
 
-.gacha-card-icon { font-size: 34px; text-align: center; }
-.gacha-card-name { font-size: 14px; font-weight: 900; color: #fff; text-align: center; }
-.gacha-card-desc { font-size: 10.5px; color: #c9c3b8; line-height: 1.45; text-align: center; }
+.gacha-card-icon { font-size: 32px; text-align: center; }
+.gacha-card-name { font-size: 13.5px; font-weight: 900; color: #fff; text-align: center; }
+.gacha-card-desc { font-size: 10px; color: #c9c3b8; line-height: 1.4; text-align: center; }
 .gacha-card-status {
-  font-size: 10px; text-align: center; font-weight: bold; color: #8c829e;
-  border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 6px;
+  font-size: 9.5px; text-align: center; font-weight: bold; color: #8c829e;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 5px;
 }
 .gacha-card-item.selected .gacha-card-status { color: #ff758f; }
 
 .gacha-confirm-btn {
-  margin-top: 24px; background: #f7e6c4; color: #211c2e; border: none;
+  margin-top: 22px; background: #f7e6c4; color: #211c2e; border: none;
   border-radius: 25px; padding: 12px 36px; font-size: 13px; font-weight: 900;
   cursor: pointer; box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
+}
+
+/* ==========================================================
+   🚨 重大歷史事件 / 危機飛入衝擊動畫（飛出並震動 Hold 住）
+========================================================== */
+.crisis-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(10, 4, 8, 0.96);
+  backdrop-filter: blur(14px);
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: crisisBgFadeIn 0.4s ease-out both;
+}
+
+.crisis-card-box {
+  background: #1e0e14;
+  border: 3px solid #ff334b;
+  border-radius: 20px;
+  max-width: 440px;
+  width: 100%;
+  padding: 26px 20px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 50px rgba(255, 51, 75, 0.6), inset 0 0 20px rgba(255, 51, 75, 0.3);
+  /* 瞬間由螢幕深處向前暴衝飛出 */
+  animation: crisisCardFlyIn 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) both, crisisHeartbeat 1.5s 0.6s infinite ease-in-out;
+}
+
+.crisis-badge-glow {
+  display: inline-block;
+  background: #ff334b;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 20px #ff334b;
+}
+
+.crisis-title-text {
+  font-size: 19px;
+  font-weight: 900;
+  color: #ffccd5;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.crisis-body-desc {
+  font-size: 13px;
+  color: #e5d8dc;
+  line-height: 1.75;
+  margin-bottom: 22px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 51, 75, 0.25);
+}
+
+.crisis-enter-btn {
+  background: #ff334b;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 34px;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 0 25px rgba(255, 51, 75, 0.8);
+  transition: all 0.2s ease;
+}
+
+.crisis-enter-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.crisis-enter-btn:not(:disabled):hover {
+  transform: scale(1.05);
+  background: #ff4d63;
 }
 
 /* 紀念冊 */
@@ -376,8 +443,35 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   padding: 10px 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px;
 }
 
+/* 動畫設定 */
 @keyframes overlayDimIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes cardBurstOut {
   0% { opacity: 0; transform: scale(0.2) rotateY(180deg) translateY(200px); }
   100% { opacity: 1; transform: scale(1) rotateY(0deg) translateY(0); }
+}
+
+@keyframes crisisBgFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 卡片飛入特效 */
+@keyframes crisisCardFlyIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.1) translateY(120px) rotate(-4deg);
+  }
+  75% {
+    transform: scale(1.06) translateY(-8px) rotate(1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+/* Hold 住時的心跳脈衝效果 */
+@keyframes crisisHeartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
 }
