@@ -1,5 +1,5 @@
 // =========================================================================
-// 寫實人生模擬器：四大國度深度獨立一生 · 因果動態命運結算版
+// 寫實人生模擬器：四大國度專屬天賦 + 人生終章專屬圖鑑與結算動畫版
 // =========================================================================
 
 // 1. 出生國度庫（SVG 高解析旗幟）
@@ -55,7 +55,7 @@ const allPerks = [
   { id: 'zen', icon: '🕊️', name: '通透心境', desc: '幸福+20、健康+5。看淡內耗與世俗焦慮，逆境中自動守護心靈自由。', stats: { happiness: 20, health: 5 } }
 ];
 
-// 4. 四大國度完全獨立的完整一生劇情樹（由生到死）
+// 4. 四大國度完全獨立的完整一生劇情樹（由生到死，每個國家皆有專屬天賦連鎖）
 const nationTimelines = {
   // =========================================================================
   // 🇭🇰 中國香港主線
@@ -142,10 +142,12 @@ const nationTimelines = {
         year: 2028, age: 28, stage: '成家置業抉擇', isHistoryCrisis: false,
         title: '【2028年 · 28歲】維港夜景、居屋首期與去留抉擇',
         desc: '二十八歲，身邊朋友陸續結婚或移民，手頭累積了第一筆打拼積蓄，你面臨人生大抉擇：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '💍 與摯愛結婚，合力供九成按揭首期上車買市區屋苑，背負三十年房貸。', effects: { happiness: 28, eq: 14, money: -40, health: -6 }, log: '【28歲】你背負起房貸甜蜜責任，擁有了屬於自己的安樂窩。', next: 'hk_38' },
           { text: '🚗 堅持租樓自立，買入心儀已久的越野車，假日帶著相機遊遍香港隱秘山海。', effects: { happiness: 26, health: 10, money: -18, eq: 8 }, log: '【28歲】你拒絕被磚頭鎖死人生，享受隨時出發的自由。', next: 'hk_38' },
-          { text: '💼 辭去安穩工作，利用累積的人脈與技術獨立創辦諮詢工作室。', effects: { money: 70, intellect: 16, health: -14, happiness: 10 }, log: '【28歲】你承擔巨大風險跳出舒適圈，開闢個人事業天地。', next: 'hk_38' },
+          p === 'wealth'
+            ? { text: '★【天賦專屬】精準抄底核心地段商業鋪位與股權，開啟資產裂變之路。', isPerk: true, effects: { money: 85, intellect: 18, happiness: 14 }, log: '【28歲 ⚠️ 隱藏天賦】你展現出卓越的商業資本嗅覺。', next: 'hk_38' }
+            : { text: '💼 辭去安穩工作，利用累積的人脈與技術獨立創辦諮詢工作室。', effects: { money: 70, intellect: 16, health: -14, happiness: 10 }, log: '【28歲】你承擔巨大風險跳出舒適圈，開闢個人事業天地。', next: 'hk_38' },
           { text: '📈 極限自律節儉，全部工資定投全球資產，提早學習複利資產管理。', effects: { money: 55, intellect: 14, happiness: 10 }, log: '【28歲】你建立起清醒冷靜的資產複利防線。', next: 'hk_38' }
         ]
       },
@@ -153,11 +155,13 @@ const nationTimelines = {
         year: 2038, age: 38, stage: '中年天花板與健康', isHistoryCrisis: false,
         title: '【2038年 · 38歲】中環寫字樓、白髮與身心健康',
         desc: '人到三十八歲，體力不再如二十歲任性，上有高堂下有幼小，體檢報告出現紅字：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '🩺 徹底放下虛榮與應酬，每週規律重訓與地中海飲食，健康逆齡重回巔峰。', effects: { health: 30, happiness: 24, money: -5 }, log: '【38歲】你將健康重新排在第一位，換來清爽體魄。', next: 'hk_65' },
           { text: '🏢 忍辱負重守住大機構高層職位，全力賺錢供養子女升讀頂尖學府。', effects: { money: 65, eq: 12, health: -18, happiness: -6 }, log: '【38歲】你為家庭付出了全部心血，成為最堅強的頂樑柱。', next: 'hk_65' },
           { text: '☕ 轉移跑道在西貢開設精品獨立咖啡館，把時間留給慢活與陪伴父母。', effects: { happiness: 32, health: 15, money: -15, eq: 10 }, log: '【38歲】你打破中年焦慮，找到了滋養靈魂的生活步調。', next: 'hk_65' },
-          { text: '📈 敏銳把握市場週期低谷，果斷進行資產重組，實現被動現金流退休。', effects: { money: 95, intellect: 15, health: -5, happiness: 15 }, log: '【38歲】半生沉澱的睿智讓你真正告別金錢束縛。', next: 'hk_65' }
+          p === 'iron'
+            ? { text: '★【天賦專屬】鋼鐵體能無所畏懼，中年挑戰香港百公里越野越戰越勇。', isPerk: true, effects: { health: 35, happiness: 30, eq: 12 }, log: '【38歲 ⚠️ 隱藏天賦】你的強悍體格打破了中年危機的魔咒！', next: 'hk_65' }
+            : { text: '📈 敏銳把握市場週期低谷，果斷進行資產重組，實現被動現金流退休。', effects: { money: 95, intellect: 15, health: -5, happiness: 15 }, log: '【38歲】半生沉澱的睿智讓你真正告別金錢束縛。', next: 'hk_65' }
         ]
       },
       'hk_65': {
@@ -195,19 +199,23 @@ const nationTimelines = {
         year: 2003, age: 3, stage: '幼兒啟蒙', isHistoryCrisis: false,
         title: '【2003年 · 3歲】保育園木地板與夏日風鈴',
         desc: '東京下町老街，保育園老師帶著大家在榻榻米上閱讀繪本、做手作，你的午後時光：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '🧩 專注用紙黏土與木積木製作精細微型手作，極具耐心。', effects: { intellect: 8, eq: 4, happiness: 6 }, log: '【3歲】你展現出日本傳統職人的專注與精細感。', next: 'jp_6' },
           { text: '🏃 穿著小木屐在神社砂石地奔跑，參加夏日祭典撈金魚。', effects: { health: 10, eq: 8, happiness: 10 }, log: '【3歲】神社祭典的鼓聲與笑聲溫暖了你的童年。', next: 'jp_6' },
           { text: '🎨 在畫簿上專注繪畫四季櫻花與落葉，色彩感性純粹。', effects: { happiness: 12, intellect: 6, eq: 4 }, log: '【3歲】你對大自然細微變化擁有非凡的敏感度。', next: 'jp_6' },
-          { text: '🍙 乖乖幫阿媽捏三角飯糰、擺放筷子，從小養成禮貌規矩。', effects: { eq: 10, happiness: 8, health: 4 }, log: '【3歲】你懂事禮貌，受到鄰里稱讚。', next: 'jp_6' }
+          p === 'music'
+            ? { text: '★【天賦專屬】在幼兒園風琴前無師自通彈出久石讓童謠旋律。', isPerk: true, effects: { eq: 16, happiness: 18, intellect: 6 }, log: '【3歲 隱藏才華】你展露出驚人的音樂悟性。', next: 'jp_6' }
+            : { text: '🍙 乖乖幫阿媽捏三角飯糰、擺放筷子，從小養成禮貌規矩。', effects: { eq: 10, happiness: 8, health: 4 }, log: '【3歲】你懂事禮貌，受到鄰里稱讚。', next: 'jp_6' }
         ]
       },
       'jp_6': {
         year: 2006, age: 6, stage: '小學校入學式', isHistoryCrisis: false,
         title: '【2006年 · 6歲】櫻花樹下的小學入學式',
         desc: '背上祖父母贈送的厚重紅色/黑色硬皮書包（ランドセル），正式成為小學生：',
-        getOptions: () => [
-          { text: '⚾ 加入少年棒球隊，每天清晨「朝練」風雨不改，練習揮棒千次。', effects: { health: 16, eq: 8, happiness: 6 }, log: '【6歲】嚴苛的棒球部鍛鍊練就了你的頑強意志。', next: 'jp_11' },
+        getOptions: (p) => [
+          p === 'iron'
+            ? { text: '★【天賦專屬】小學棒球部朝練從不缺席，獲評為全地區最有前途少棒神童。', isPerk: true, effects: { health: 22, eq: 10, happiness: 10 }, log: '【6歲 ⚠️ 隱藏天賦】你的強大體魄在體育社團脫穎而出！', next: 'jp_11' }
+            : { text: '⚾ 加入少年棒球隊，每天清晨「朝練」風雨不改，練習揮棒千次。', effects: { health: 16, eq: 8, happiness: 6 }, log: '【6歲】嚴苛的棒球部鍛鍊練就了你的頑強意志。', next: 'jp_11' },
           { text: '🎹 每天放學乖乖去琴房練鋼琴，手指磨出硬皮亦堅持不懈。', effects: { eq: 14, intellect: 8, happiness: 8 }, log: '【6歲】音符成為你童年最深沉的精神世界。', next: 'jp_11' },
           { text: '📚 報名著名「進學塾」，提前為私立中學校受驗苦讀。', effects: { intellect: 16, eq: 2, happiness: -4 }, log: '【6歲】你在成績榜名列前茅，但也早早背負同儕壓力。', next: 'jp_11' },
           { text: '🪲 暑假帶著捕蟲網跑去鄉下抓獨角仙、收集標本。', effects: { happiness: 16, health: 12, eq: 6 }, log: '【6歲】鄉野大自然留給你最燦爛的夏日回憶。', next: 'jp_11' }
@@ -222,9 +230,11 @@ const nationTimelines = {
         },
         title: '【2011年 · 11歲】311 地震、停電夜與防災避難所',
         desc: '大地劇烈搖晃，身邊大人在恐慌中相互扶持。在避難所燭光下，你如何面對這場天災：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '🤝 主動在避難所搬運毛毯與物資，主動照顧哭鬧的幼童。', effects: { eq: 20, happiness: 12, health: 6 }, log: '【11歲】你在災難中展現出過人勇氣與利他之心。', next: 'jp_15' },
-          { text: '🕯️ 在停電的寒夜靜靜陪伴父母，體會到「羈絆（きずな）」的重量。', effects: { happiness: 18, eq: 16, intellect: 6 }, log: '【11歲】這次天災讓你真正理解生命的寶貴與珍惜當下。', next: 'jp_15' },
+          p === 'zen'
+            ? { text: '★【天賦專屬】神情沉著自洽，用冷靜與溫暖的佛學思維安撫全場恐慌者。', isPerk: true, effects: { eq: 24, happiness: 22, health: 8 }, log: '【11歲 ⚠️ 隱藏天賦】你在巨災中成為大家的心靈定海神針。', next: 'jp_15' }
+            : { text: '🕯️ 在停電的寒夜靜靜陪伴父母，體會到「羈絆（きずな）」的重量。', effects: { happiness: 18, eq: 16, intellect: 6 }, log: '【11歲】這次天災讓你真正理解生命的寶貴與珍惜當下。', next: 'jp_15' },
           { text: '📻 專注收聽收音機防災廣播，記錄避難手冊，思考防災機制。', effects: { intellect: 18, eq: 8, money: 4 }, log: '【11歲】你以冷靜理性思考災害防禦，立志改變世界。', next: 'jp_15' },
           { text: '🎸 用唯一沒壞的小木結他輕輕彈奏民謠，溫暖避難所疲憊的人們。', effects: { happiness: 24, eq: 18, health: 4 }, log: '【11歲】你的琴聲成為災後黑暗中最溫柔的微光。', next: 'jp_15' }
         ]
@@ -233,8 +243,10 @@ const nationTimelines = {
         year: 2015, age: 15, stage: '高校入試與部活', isHistoryCrisis: false,
         title: '【2015年 · 15歲】高校青春、甲子園夢想與文化祭',
         desc: '考入高中，面對日本高中最重要的「部活動」與青春賽道：',
-        getOptions: () => [
-          { text: '🏃 投入運動部競技，誓要帶領隊伍殺入全國高校體育大賽。', effects: { health: 22, eq: 10, happiness: 10 }, log: '【15歲】汗水與淚水交織成最純粹的熱血青春。', next: 'jp_20' },
+        getOptions: (p) => [
+          p === 'leader'
+            ? { text: '★【天賦專屬】當選全校生徒會長（學生會長），帶領部活改革引領風潮。', isPerk: true, effects: { eq: 22, intellect: 14, happiness: 16 }, log: '【15歲 ⚠️ 隱藏天賦】你在全校樹立起極高威信與領袖魅力。', next: 'jp_20' }
+            : { text: '🏃 投入運動部競技，誓要帶領隊伍殺入全國高校體育大賽。', effects: { health: 22, eq: 10, happiness: 10 }, log: '【15歲】汗水與淚水交織成最純粹的熱血青春。', next: 'jp_20' },
           { text: '📚 謝絕所有社團，每天在自習室苦讀至深夜，目標東京大學。', effects: { intellect: 22, health: -6, happiness: -4 }, log: '【15歲】你以孤獨為代價，向頂尖學府發起衝刺。', next: 'jp_20' },
           { text: '🎨 加入輕音樂部，在秋季文化祭舞台上擔任主唱引爆全場。', effects: { happiness: 24, eq: 16, intellect: 6 }, log: '【15歲】舞台上的歡呼聲成為你青春的高光時刻。', next: 'jp_20' },
           { text: '🍵 加入傳統茶道與弓道部，在靜謐中磨礪內心的專注與禮數。', effects: { eq: 16, happiness: 18, health: 8 }, log: '【15歲】你在喧囂世界中修養出沉穩從容的氣質。', next: 'jp_20' }
@@ -244,9 +256,11 @@ const nationTimelines = {
         year: 2020, age: 20, stage: '成人式與就職活動', isHistoryCrisis: false,
         title: '【2020年 · 20歲】成人式、就職活動（就活）與西裝海',
         desc: '二十歲成人禮，踏入殘酷的日本就業市場。穿上千篇一律的黑色西裝穿梭面試：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '🏢 擠破頭拿下傳統綜合商社/大型銀行內定，開啟社畜奮鬥路。', effects: { money: 40, eq: 14, health: -14, happiness: -4 }, log: '【20歲】你擠入菁英體系，以健康換取社會地位與薪資。', next: 'jp_30' },
-          { text: '💻 拒絕傳統大企業官僚體系，加入涉谷新興 IT 創業團隊做全端開發。', effects: { money: 35, intellect: 18, happiness: 14 }, log: '【20歲】你踏上技術驅動的自由道路，活力滿滿。', next: 'jp_30' },
+          p === 'geek'
+            ? { text: '★【天賦專屬】涉谷頂尖 AI 自動化新創團隊破格特招，免試直聘為架構師。', isPerk: true, effects: { money: 60, intellect: 22, happiness: 16 }, log: '【20歲 ⚠️ 隱藏天賦】你在數碼浪潮中打破傳統日企年功序列！', next: 'jp_30' }
+            : { text: '💻 拒絕傳統大企業官僚體系，加入涉谷新興 IT 創業團隊做全端開發。', effects: { money: 35, intellect: 18, happiness: 14 }, log: '【20歲】你踏上技術驅動的自由道路，活力滿滿。', next: 'jp_30' },
           { text: '🍜 拜京都傳統老舖料理長為師，從洗碗磨刀開始磨礪職人技藝。', effects: { happiness: 22, health: 8, eq: 12, money: -5 }, log: '【20歲】你選擇了樸實純粹的手作匠人道路。', next: 'jp_30' },
           { text: '🌾 逃離東京人潮，參加地方振興專案前往北海道經營酪農農場。', effects: { health: 22, happiness: 28, money: 5 }, log: '【20歲】在大自然懷抱中，你過上了自給自足的安寧生活。', next: 'jp_30' }
         ]
@@ -255,10 +269,12 @@ const nationTimelines = {
         year: 2030, age: 30, stage: '三十而立與抉擇', isHistoryCrisis: false,
         title: '【2030年 · 30歲】深夜居酒屋、孤獨死焦慮與人生錨定',
         desc: '三十歲的東京夜色冰冷，身邊同事被過勞擊垮，你決定如何錨定自己的人生：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '💍 與溫柔伴侶結為連理，在郊區購置一戶建住宅，用心守護家庭。', effects: { happiness: 32, eq: 16, money: -30, health: 6 }, log: '【30歲】你擁有了屬於自己的溫馨歸宿，內心平靜。', next: 'jp_42' },
           { text: '🧗 勇敢自立門戶，創辦個人設計/獨立諮詢品牌，打破公司階層。', effects: { money: 65, intellect: 16, health: -10, happiness: 12 }, log: '【30歲】你憑實力打破體制枷鎖，贏得事業自由。', next: 'jp_42' },
-          { text: '🧘 奉行極簡主義與低慾望自洽生活，每日下班煮飯看書，不婚不買房。', effects: { happiness: 28, health: 18, eq: 12, money: 20 }, log: '【30歲】你從世俗比較中解脫出來，過得清爽自由。', next: 'jp_42' },
+          p === 'wealth'
+            ? { text: '★【天賦專屬】看準低息時代，果斷佈局秋葉原與涉谷核心不動產租賃，年入千萬。', isPerk: true, effects: { money: 85, intellect: 16, happiness: 16 }, log: '【30歲 ⚠️ 隱藏天賦】你早早實現了財務被動現金流自由！', next: 'jp_42' }
+            : { text: '🧘 奉行極簡主義與低慾望自洽生活，每日下班煮飯看書，不婚不買房。', effects: { happiness: 28, health: 18, eq: 12, money: 20 }, log: '【30歲】你從世俗比較中解脫出來，過得清爽自由。', next: 'jp_42' },
           { text: '💼 拼命加班晉升為部門部長，掌控億萬預算，但身體嚴重透支。', effects: { money: 75, eq: 14, health: -25, happiness: -6 }, log: '【30歲】你站上權力頂點，但也耗盡了身心體力。', next: 'jp_42' }
         ]
       },
@@ -297,8 +313,10 @@ const nationTimelines = {
         year: 2004, age: 4, stage: '幼童泥地與下午茶', isHistoryCrisis: false,
         title: '【2004年 · 4歲】倫敦陰雨天與後花園泥濘',
         desc: '窗外陰雨綿綿，壁爐柴火噼啪作響。你在後花園草地上踩水坑、玩泥巴：',
-        getOptions: () => [
-          { text: '⚽ 披上雨衣在草地上踢小足球，渾身泥水卻笑得無比燦爛。', effects: { health: 12, eq: 8, happiness: 10 }, log: '【4歲】你在英倫陰雨中練就了一副好體魄與樂觀天性。', next: 'uk_11' },
+        getOptions: (p) => [
+          p === 'iron'
+            ? { text: '★【天賦專屬】小雨中連踢兩小時足球不覺疲倦，體魄宛如小鋼砲。', isPerk: true, effects: { health: 18, eq: 8, happiness: 12 }, log: '【4歲 ⚠️ 隱藏天賦】你在嚴寒英倫風雨中展現出過人體格。', next: 'uk_11' }
+            : { text: '⚽ 披上雨衣在草地上踢小足球，渾身泥水卻笑得無比燦爛。', effects: { health: 12, eq: 8, happiness: 10 }, log: '【4歲】你在英倫陰雨中練就了一副好體魄與樂觀天性。', next: 'uk_11' },
           { text: '🚂 在客廳羊毛地毯上搭建古典蒸汽火車軌道，摸索齒輪轉動。', effects: { intellect: 8, happiness: 8, eq: 2 }, log: '【4歲】你沉迷於機械結構，展現出探究精神。', next: 'uk_11' },
           { text: '🎨 拿著水彩筆畫出各種奇形怪狀的倫敦巴士與大笨鐘。', effects: { happiness: 12, intellect: 6, eq: 4 }, log: '【4歲】你對英倫建築與城市色彩充滿想像力。', next: 'uk_11' },
           { text: '☕ 跟隨長輩喝加奶英式紅茶、吃司康餅，學習餐桌禮儀。', effects: { eq: 12, happiness: 8, health: 2 }, log: '【4歲】你從小舉止得體，受到親友喜愛。', next: 'uk_11' }
@@ -308,8 +326,10 @@ const nationTimelines = {
         year: 2011, age: 11, stage: '中學生活與音樂啟蒙', isHistoryCrisis: false,
         title: '【2011年 · 11歲】Secondary School、二手黑膠與車庫樂隊',
         desc: '升入中學，穿上傳統西裝校服。倫敦跳蚤市場與搖滾文化深深吸引著你：',
-        getOptions: () => [
-          { text: '🎸 在舊貨攤淘得二手電結他，在車庫瘋狂苦練綠洲與披頭四名曲。', effects: { eq: 16, happiness: 18, intellect: 6 }, log: '【11歲】搖滾樂成為你青春期宣洩荷爾蒙的最佳出口。', next: 'uk_16' },
+        getOptions: (p) => [
+          p === 'music'
+            ? { text: '★【天賦專屬】在車庫彈出迷幻純熟的藍調和弦，被讚為倫敦地下搖滾小天才。', isPerk: true, effects: { eq: 22, happiness: 22, intellect: 8 }, log: '【11歲 ⚠️ 隱藏天賦】你注定成為英倫音樂浪潮的一員。', next: 'uk_16' }
+            : { text: '🎸 在舊貨攤淘得二手電結他，在車庫瘋狂苦練綠洲與披頭四名曲。', effects: { eq: 16, happiness: 18, intellect: 6 }, log: '【11歲】搖滾樂成為你青春期宣洩荷爾蒙的最佳出口。', next: 'uk_16' },
           { text: '📚 沉浸在公立圖書館讀遍莎士比亞劇作與世界近代史。', effects: { intellect: 16, eq: 6, happiness: 4 }, log: '【11歲】你積累了深厚的人文底蘊與思辨能力。', next: 'uk_16' },
           { text: '⚽ 代表學校出戰週末少年足球聯賽，擔任主力中場衝鋒陷陣。', effects: { health: 16, eq: 8, happiness: 8 }, log: '【11歲】足球賽場的對抗塑造了你強硬不屈的球風。', next: 'uk_16' },
           { text: '🤝 與各色移民後裔同學打成一片，週末在街角滑板場練習跳台。', effects: { eq: 16, happiness: 14, health: 6 }, log: '【11歲】你結交了無拘無束的一生好友。', next: 'uk_16' }
@@ -324,10 +344,12 @@ const nationTimelines = {
         },
         title: '【2016年 · 16歲】脫歐公投之夜、英鎊暴跌與社會大分裂',
         desc: '電視台開票那一夜，身邊朋友因立場不同反目成仇，你如何面對這個分歧的時代：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '🗣️ 參加校園青年辯論社，撰寫長文呼籲各方理性對話包容分歧。', effects: { intellect: 18, eq: 16, happiness: 4 }, log: '【16歲】你展現出卓越的政治哲學思維與領袖包容力。', next: 'uk_18' },
           { text: '🎸 將時代的迷惘與怒火寫成原創龐克單曲，在倫敦地下酒吧引發萬人合唱。', effects: { happiness: 24, eq: 18, money: 8 }, log: '【16歲】你用音樂唱出了一整代英國青年的焦慮與心聲。', next: 'uk_18' },
-          { text: '📉 敏銳察覺匯率動盪，提前將零用儲蓄兌換為美元或避險資產。', effects: { money: 25, intellect: 14, eq: 6 }, log: '【16歲】你在混亂中提早培養出敏銳的金融嗅覺。', next: 'uk_18' },
+          p === 'zen'
+            ? { text: '★【天賦專屬】冷靜看透政治宣傳把戲，心境豁達從容，不受群體狂熱裹挾。', isPerk: true, effects: { happiness: 26, intellect: 16, eq: 16 }, log: '【16歲 ⚠️ 隱藏天賦】你在社會大分裂中守住了獨立思考。', next: 'uk_18' }
+            : { text: '📉 敏銳察覺匯率動盪，提前將零用儲蓄兌換為美元或避險資產。', effects: { money: 25, intellect: 14, eq: 6 }, log: '【16歲】你在混亂中提早培養出敏銳的金融嗅覺。', next: 'uk_18' },
           { text: '🍃 遠離政治噪音，騎單車去肯特郡鄉間漫遊，在大自然中平復心神。', effects: { health: 14, happiness: 18, eq: 8 }, log: '【16歲】你拒絕被撕裂的意識形態吞噬，守護內心淨土。', next: 'uk_18' }
         ]
       },
@@ -335,10 +357,12 @@ const nationTimelines = {
         year: 2018, age: 18, stage: 'A-Level 與大學賽道', isHistoryCrisis: false,
         title: '【2018年 · 18歲】A-Level 放榜、Pub 慶祝與青春遠行',
         desc: '十八歲成人禮，在當地傳統 Pub 點上一杯黑啤慶祝，面對未來的道路：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '🎓 考入牛津/劍橋/LSE頂尖學府攻讀PPE（哲學政治經濟學），邁向政經菁英。', effects: { intellect: 24, money: -15, eq: 8 }, log: '【18歲 ⚠️ 命運轉折】你步入大英帝國菁英搖籃，開啟宏大抱負。', next: 'uk_23' },
           { text: '🚐 與樂隊好友合買一輛破舊麵包車，展開橫跨全英的地下巡演流浪。', effects: { happiness: 28, eq: 16, money: -8, health: -4 }, log: '【18歲 ⚠️ 命運轉折】你過上了最純粹浪漫的搖滾青春！', next: 'uk_23' },
-          { text: '💼 前往倫敦金融城（The City）投行擔任基層實習分析師，高壓摸爬滾打。', effects: { money: 40, intellect: 16, health: -14, happiness: -6 }, log: '【18歲 ⚠️ 命運轉折】你在冷酷的資本絞肉機裡飛速成長。', next: 'uk_23' },
+          p === 'leader'
+            ? { text: '★【天賦專屬】當選全英青年商會主席，早早拿到倫敦金牌投資機構直通門票。', isPerk: true, effects: { money: 50, eq: 22, intellect: 14 }, log: '【18歲 ⚠️ 隱藏天賦】你在英倫名流圈中如魚得水。', next: 'uk_23' }
+            : { text: '💼 前往倫敦金融城（The City）投行擔任基層實習分析師，高壓摸爬滾打。', effects: { money: 40, intellect: 16, health: -14, happiness: -6 }, log: '【18歲 ⚠️ 命運轉折】你在冷酷的資本絞肉機裡飛速成長。', next: 'uk_23' },
           { text: '🌿 前往蘇格蘭高原農場打工自立，享受清澈冷冽的風與漫無邊際的天地。', effects: { health: 20, happiness: 24, eq: 10 }, log: '【18歲 ⚠️ 命運轉折】你在大山大海中找到了心靈的寧靜。', next: 'uk_23' }
         ]
       },
@@ -346,9 +370,11 @@ const nationTimelines = {
         year: 2023, age: 23, stage: '生活成本危機', isHistoryCrisis: false,
         title: '【2023年 · 23歲】高通脹、鐵路大罷工與房租重壓',
         desc: '俄烏衝突引發能源危機，倫敦房租飆升、地鐵三天兩頭罷工，二十三歲的你面對現實考驗：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '💻 轉向全端遠距接案，搬離昂貴倫敦，移居曼徹斯特/利茲節省開支。', effects: { money: 35, happiness: 16, health: 8 }, log: '【23歲】你靈活應變，成功抵禦了生活成本危機。', next: 'uk_35' },
-          { text: '🏢 在倫敦律所/金融公司咬牙苦熬，拼命爭取晉升抗衡通脹。', effects: { money: 55, intellect: 12, health: -16, happiness: -8 }, log: '【23歲】你用健康抗衡現實，在職場階梯上站穩陣腳。', next: 'uk_35' },
+          p === 'geek'
+            ? { text: '★【天賦專屬】主導高頻演算法交易核心模型，年終獲頒數十萬英鎊分紅！', isPerk: true, effects: { money: 85, intellect: 22, happiness: 14 }, log: '【23歲 ⚠️ 隱藏天賦】你在金融城頂級量化界一戰成名！', next: 'uk_35' }
+            : { text: '🏢 在倫敦律所/金融公司咬牙苦熬，拼命爭取晉升抗衡通脹。', effects: { money: 55, intellect: 12, health: -16, happiness: -8 }, log: '【23歲】你用健康抗衡現實，在職場階梯上站穩陣腳。', next: 'uk_35' },
           { text: '🍻 進入社區老字號精釀啤酒坊當釀酒師，享受手作樂趣與人情溫暖。', effects: { happiness: 26, health: 10, eq: 14, money: 5 }, log: '【23歲】在動盪時代，你守住了生活的精緻與自得其樂。', next: 'uk_35' },
           { text: '📈 深入鑽研全球宏觀經濟與大宗商品對沖，實現小額資產翻倍。', effects: { money: 60, intellect: 18, happiness: 8 }, log: '【23歲】危機成為你的跳板，資本積累領先同齡人。', next: 'uk_35' }
         ]
@@ -357,10 +383,12 @@ const nationTimelines = {
         year: 2035, age: 35, stage: '三十五歲 · 鄉野莊園', isHistoryCrisis: false,
         title: '【2035年 · 35歲】科茨沃爾德蜜色石屋與中場定錨',
         desc: '三十五歲，厭倦了都會喧囂，你帶著打拼多年的一筆積蓄做出人生定錨：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '🏡 買下科茨沃爾德鄉村的古老蜜色石屋，開闢玫瑰花園，建立溫馨家庭。', effects: { happiness: 35, health: 18, money: -35, eq: 12 }, log: '【35歲】你擁有了夢寐以求的英倫鄉間莊園，家庭美滿。', next: 'uk_68' },
           { text: '🚗 保持單身旅居，駕著老爺車漫遊歐洲大陸，記錄各地民謠與古老城堡。', effects: { happiness: 30, health: 14, money: -15, eq: 10 }, log: '【35歲】你活成了一個自由浪蕩的現代遊俠。', next: 'uk_68' },
-          { text: '💼 創立獨立文藝出版廠牌與獨立唱片公司，扶持全球青年才俊。', effects: { money: 75, intellect: 16, eq: 16, happiness: 15 }, log: '【35歲】你成為英國文化界舉足輕重的人物。', next: 'uk_68' },
+          p === 'wealth'
+            ? { text: '★【天賦專屬】抄底收購老牌獨立黑膠唱片廠牌與私立莊園，享有豐厚版稅。', isPerk: true, effects: { money: 95, intellect: 16, eq: 16, happiness: 18 }, log: '【35歲 ⚠️ 隱藏天賦】你成為橫跨資本與藝術的名流藏家。', next: 'uk_68' }
+            : { text: '💼 創立獨立文藝出版廠牌與獨立唱片公司，扶持全球青年才俊。', effects: { money: 75, intellect: 16, eq: 16, happiness: 15 }, log: '【35歲】你成為英國文化界舉足輕重的人物。', next: 'uk_68' },
           { text: '🧘 每日在鄉間騎馬、品茶、閱讀古籍，身心處於極致的平和狀態。', effects: { health: 26, happiness: 32, eq: 14, money: 10 }, log: '【35歲】你參透了生命的節奏，優雅自洽。', next: 'uk_68' }
         ]
       },
@@ -388,21 +416,25 @@ const nationTimelines = {
         year: 2003, age: 3, stage: '宗族大家庭童年', isHistoryCrisis: false,
         title: '【2003年 · 3歲】熱鬧的天井、香料茶與風箏',
         desc: '班加羅爾炎熱午後，家族三代幾十口人聚在天井，香料奶茶香氣瀰漫：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '🪁 跟堂兄弟爬上屋頂放彩色風箏，鬥線爭奪高空冠軍。', effects: { health: 12, eq: 8, happiness: 10 }, log: '【3歲】你在熱鬧喧囂的宗族溫情中度過快樂童年。', next: 'in_10' },
           { text: '🏏 在泥地用木板自製球棒打街頭板球，身手無比敏捷。', effects: { health: 14, eq: 10, happiness: 8 }, log: '【3歲】街頭板球練就了你敏銳的運動天賦。', next: 'in_10' },
           { text: '🧩 坐在長輩腳邊拆解舊電扇馬達，對電機運轉痴迷不已。', effects: { intellect: 10, happiness: 6, eq: 2 }, log: '【3歲】你展露出對理工科技的天然好奇心。', next: 'in_10' },
-          { text: '🪘 聆聽傳統塔布拉鼓節奏，隨旋律手舞足蹈，極有樂感。', effects: { eq: 12, happiness: 12, intellect: 4 }, log: '【3歲】你在傳統印度旋律中陶冶性情。', next: 'in_10' }
+          p === 'music'
+            ? { text: '★【天賦專屬】敲擊傳統塔布拉鼓節奏如有神助，令音樂家長輩驚為天人。', isPerk: true, effects: { eq: 18, happiness: 16, intellect: 6 }, log: '【3歲 ⚠️ 隱藏天賦】你在印度傳統古典律動中展現驚人天賦。', next: 'in_10' }
+            : { text: '🪘 聆聽傳統塔布拉鼓節奏，隨旋律手舞足蹈，極有樂感。', effects: { eq: 12, happiness: 12, intellect: 4 }, log: '【3歲】你在傳統印度旋律中陶冶性情。', next: 'in_10' }
         ]
       },
       'in_10': {
         year: 2010, age: 10, stage: '英聯邦熱潮與奧數狂熱', isHistoryCrisis: false,
         title: '【2010年 · 10歲】新德里英聯邦運動會與高壓奧數',
         desc: '印度科技產業騰飛，全家人將「改變階級」的全部期望寄託在你的學業上：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '📚 每天苦做幾十頁高難度數學競賽題，志在衝刺頂級工程名校。', effects: { intellect: 16, eq: 2, happiness: -4 }, log: '【10歲】你展現出可怕的數學天賦，成為全家族的驕傲。', next: 'in_17' },
           { text: '🏏 入選少年板球俱樂部主力，志願成為國家隊職業板球明星。', effects: { health: 18, eq: 10, happiness: 10 }, log: '【10歲】在綠茵板球場上，你享受全場熱烈的歡呼。', next: 'in_17' },
-          { text: '💻 偷偷在網吧自學 C++ 編程，寫出簡易資料庫程序震驚老師。', effects: { intellect: 18, money: 5, happiness: 8 }, log: '【10歲】你提早推開了全球軟體世界的大門。', next: 'in_17' },
+          p === 'geek'
+            ? { text: '★【天賦專屬】自學 Linux 與 C 語言，編寫出班加羅爾青少年社群資料庫。', isPerk: true, effects: { intellect: 24, money: 10, happiness: 12 }, log: '【10歲 ⚠️ 隱藏天賦】你早早展露出頂級軟體工程師的神髓！', next: 'in_17' }
+            : { text: '💻 偷偷在網吧自學 C++ 編程，寫出簡易資料庫程序震驚老師。', effects: { intellect: 18, money: 5, happiness: 8 }, log: '【10歲】你提早推開了全球軟體世界的大門。', next: 'in_17' },
           { text: '🤝 懂事幫叔父打理香料香精批發攤位，練就一手過人砍價本領。', effects: { eq: 16, money: 12, intellect: 6 }, log: '【10歲】你在市井鬧市中學會了最實戰的商業智慧。', next: 'in_17' }
         ]
       },
@@ -410,8 +442,10 @@ const nationTimelines = {
         year: 2017, age: 17, stage: '地獄級 JEE 理工大考', isHistoryCrisis: false,
         title: '【2017年 · 17歲 ⚠️】科塔（Kota）地獄補習與 JEE 決戰',
         desc: '百萬考生爭奪千分之五錄取率的印度理工（IIT）門票！每天高壓苦讀 16 小時：',
-        getOptions: () => [
-          { text: '🎓 拼盡全力以全國前五百名考入 IIT 孟買分校電腦系，改寫家族命運！', effects: { intellect: 30, money: 20, health: -14, happiness: 12 }, log: '【17歲 ⚠️ 命運轉折】你拿到了全球科技界含金量最高的敲門磚！', next: 'in_19' },
+        getOptions: (p) => [
+          p === 'leader'
+            ? { text: '★【天賦專屬】考取邦內高考狀元，被 IIT 孟買分校提前特招並獲全額資助！', isPerk: true, effects: { intellect: 32, money: 25, eq: 18, happiness: 16 }, log: '【17歲 ⚠️ 隱藏天賦】你成為全邦千萬學子的偶像與傳奇！', next: 'in_19' }
+            : { text: '🎓 拼盡全力以全國前五百名考入 IIT 孟買分校電腦系，改寫家族命運！', effects: { intellect: 30, money: 20, health: -14, happiness: 12 }, log: '【17歲 ⚠️ 命運轉折】你拿到了全球科技界含金量最高的敲門磚！', next: 'in_19' },
           { text: '💼 拒絕被考試機器摧毀，直接投身班加羅爾新興軟體外包初創公司。', effects: { money: 30, eq: 16, health: 6 }, log: '【17歲 ⚠️ 命運轉折】你提早踏上商業實戰戰場。', next: 'in_19' },
           { text: '🏏 參加板球超級聯賽（IPL）青訓選拔，博取千萬年薪的職業球員生涯。', effects: { health: 24, happiness: 20, money: 15, intellect: -6 }, log: '【17歲 ⚠️ 命運轉折】你在綠茵場上爭取屬於自己的體育奇蹟。', next: 'in_19' },
           { text: '🎨 堅持攻讀心愛的寶萊塢電影編導與音樂製作，打破家庭世俗偏見。', effects: { happiness: 26, eq: 16, money: -10 }, log: '【17歲 ⚠️ 命運轉折】你用藝術向傳統宗族觀念發起挑戰。', next: 'in_19' }
@@ -426,8 +460,10 @@ const nationTimelines = {
         },
         title: '【2019年 · 19歲】廢鈔長龍、數位支付爆發與階級跳躍',
         desc: '面對一夜之間現金歸零的社會混亂，你如何把握這場史無前例的數位大變革：',
-        getOptions: () => [
-          { text: '💻 開發本土化輕量微額行動支付 App，獲矽谷頂級風投千萬美元融資！', effects: { money: 75, intellect: 20, happiness: 16 }, log: '【19歲 ⚠️ 商業奇蹟】你踩準國家數位革命浪潮，一舉成為青年科技巨子！', next: 'in_26' },
+        getOptions: (p) => [
+          p === 'wealth'
+            ? { text: '★【天賦專屬】精準預判現金荒，創立本土商戶聚合支付終端，估值突破五千萬美元！', isPerk: true, effects: { money: 95, intellect: 22, happiness: 18 }, log: '【19歲 ⚠️ 商業奇蹟】你一躍成為國家級新興科技金融獨角獸創始人！', next: 'in_26' }
+            : { text: '💻 開發本土化輕量微額行動支付 App，獲矽谷頂級風投千萬美元融資！', effects: { money: 75, intellect: 20, happiness: 16 }, log: '【19歲 ⚠️ 商業奇蹟】你踩準國家數位革命浪潮，一舉成為青年科技巨子！', next: 'in_26' },
           { text: '🤝 協助家族所有傳統店鋪全面完成數位化改造，挽救宗族生意。', effects: { eq: 22, money: 35, happiness: 14 }, log: '【19歲】你成為全家族主心骨，深受長輩尊崇。', next: 'in_26' },
           { text: '✈️ 抓住機會出國留學，成功拿下美國常春藤全額獎學金前往矽谷。', effects: { intellect: 25, money: -10, eq: 10 }, log: '【19歲】你跨出國門，邁向世界頂級科研舞台。', next: 'in_26' },
           { text: '🧘 看到無數貧苦群眾排隊受凍，發起青年義工團隊沿街發放食物與藥品。', effects: { happiness: 30, eq: 24, health: 6 }, log: '【19歲】你的善舉深受社會各界愛戴，積累無上福報。', next: 'in_26' }
@@ -437,11 +473,13 @@ const nationTimelines = {
         year: 2026, age: 26, stage: '矽谷 H-1B 或本土王國', isHistoryCrisis: false,
         title: '【2026年 · 26歲】加州矽谷 vs 班加羅爾科技王國',
         desc: '二十六歲，拿到美國科技巨頭高薪 Offer 與宗族傳統包辦婚姻的抉擇：',
-        getOptions: () => [
+        getOptions: (p) => [
           { text: '✈️ 遠赴加州矽谷擔任首席架構師，年薪百萬美元，實現美國夢。', effects: { money: 90, intellect: 18, health: -14, happiness: 10 }, log: '【26歲】你站在全球科技之巔，實現資本飛躍。', next: 'in_35' },
           { text: '🇮🇳 留守班加羅爾創辦獨角獸科技企業，為國家創造數萬個就業崗位。', effects: { money: 85, eq: 20, intellect: 16, health: -18 }, log: '【26歲】你成為國家級青年商界領袖，榮耀無雙。', next: 'in_35' },
           { text: '💍 接受家族包辦婚姻與世家千金聯姻，整合兩大宗族商業帝國。', effects: { money: 80, eq: 16, happiness: 18, health: 6 }, log: '【26歲】家族勢力空前強大，生活優渥穩固。', next: 'in_35' },
-          { text: '🧘 放棄所有名利，前往恆河源頭靜修院擔任瑜珈導師，追求心靈解脫。', effects: { happiness: 40, health: 26, eq: 16, money: -20 }, log: '【26歲】你擺脫世俗名利韁鎖，達到天人合一之境。', next: 'in_35' }
+          p === 'zen'
+            ? { text: '★【天賦專屬】參透名利虛幻，在喜馬拉雅山麓建立世界級冥想中心，引導眾生。', isPerk: true, effects: { happiness: 45, health: 30, eq: 20, money: -15 }, log: '【26歲 ⚠️ 隱藏天賦】你在靈性追求上達到超越物質的大自洽。', next: 'in_35' }
+            : { text: '🧘 放棄所有名利，前往恆河源頭靜修院擔任瑜珈導師，追求心靈解脫。', effects: { happiness: 40, health: 26, eq: 16, money: -20 }, log: '【26歲】你擺脫世俗名利韁鎖，達到天人合一之境。', next: 'in_35' }
         ]
       },
       'in_35': {
@@ -467,6 +505,42 @@ const nationTimelines = {
         ]
       }
     }
+  }
+};
+
+// =========================================================================
+// 🏆 榮譽圖鑑與結算稱號庫 (每個稱號皆有專屬插圖與印章)
+// =========================================================================
+const titleArtworks = {
+  'legend_wealth': {
+    title: '【★ 跨世紀傳奇巨擘 ★】',
+    icon: '🏛️',
+    stamp: 'LEGEND',
+    desc: '你兼顧了極致財富與心靈自由，在國家與時代的浪潮裡活出了無數人敬仰的傳奇！'
+  },
+  'master_mind': {
+    title: '【★ 時代先鋒智者 ★】',
+    icon: '🧠',
+    stamp: 'GENIUS',
+    desc: '你的卓越認知與專業成就，為這片土地與下一代留下了寶貴的思想遺產。'
+  },
+  'free_soul': {
+    title: '【★ 終極通透的自在靈魂 ★】',
+    icon: '🕊️',
+    stamp: 'ENLIGHTEN',
+    desc: '無論時代如何變遷，你一生始終溫柔真誠，活出了最高境界的心靈自洽！'
+  },
+  'fatal_meteor': {
+    title: '【★ 燃燒殆盡的流星 · 遺憾早逝 ★】',
+    icon: '☄️',
+    stamp: 'FATAL',
+    desc: '你的身體機能因長期超負荷運轉而徹底崩潰，提前告別了這個世界，留下無盡嘆息。'
+  },
+  'peaceful_elder': {
+    title: '【★ 踏實圓滿的一生 ★】',
+    icon: '🏡',
+    stamp: 'PEACEFUL',
+    desc: '你在時代的跌宕起伏中守護住了至親至愛與內心的安寧，此生了無遺憾。'
   }
 };
 
@@ -581,8 +655,8 @@ function renderEraSelect() {
         <div style="font-size: 32px; margin-bottom: 6px;">📟</div>
         <h2 style="font-size: 15px; color: #2c2f35; margin-bottom: 4px;">【千禧 2000 年代】</h2>
         <p style="font-size: 11px; color: #666; line-height: 1.6;">
-          港 / 日 / 英 / 印 四大國度完全獨立一生 · 專屬歷史<br>
-          壽命受<strong>「健康值」</strong>即時影響，隨時可能猝死或頤養天年！
+          港 / 日 / 英 / 印 四國專屬天賦連鎖 · 獨立一生<br>
+          即時<strong>「健康值」</strong>動態壽命，隨時可能猝死或頤養天年！
         </p>
       </div>
 
@@ -928,15 +1002,17 @@ function chooseLocalizedOption(eventId, optionIdx) {
 
 // 💀 健康歸零的英年早逝結算
 function renderPrematureDeath() {
-  const canvas = document.getElementById('game-canvas');
   let deathReason = "因長期超負荷工作與過度壓抑，身體器官徹底衰竭，在醫院病榻上溘然長逝。";
   if (state.birthCountry.id === 'jp') deathReason = "因長年日夜無休加班應酬，在東京深夜末班電車中突發心肌梗塞，英年早逝（過勞死）。";
   if (state.birthCountry.id === 'hk') deathReason = "因長期捱夜高壓打拼與飲食失調，突發心腦血管急性病症，在瑪麗醫院搶救無效離世。";
+  if (state.birthCountry.id === 'uk') deathReason = "因長期在陰雨潮濕中暴飲暴食與缺乏鍛鍊，突發心肺重疾遺憾告別人世。";
+  if (state.birthCountry.id === 'in') deathReason = "因長年高溫下日夜無休編程與嚴重營養失衡，在班加羅爾辦公桌前溘然長逝。";
 
-  const title = "【★ 燃燒殆盡的流星 · 遺憾早逝 ★】";
+  const badgeInfo = titleArtworks['fatal_meteor'];
 
   saveAchievement({
-    title,
+    title: badgeInfo.title,
+    artIcon: badgeInfo.icon,
     date: new Date().toLocaleDateString(),
     country: state.birthCountry.name,
     flagUrl: state.birthCountry.flagUrl,
@@ -944,62 +1020,91 @@ function renderPrematureDeath() {
     desc: deathReason
   });
 
-  let html = `
-    <div>
-      <div style="text-align: center; background: #2a151b; border: 2px solid #e63946; border-radius: 8px; padding: 10px;">
-        <span style="font-size: 10px; font-weight: 900; color: #ff758f; display: block; letter-spacing: 1px;">=== 生命提前終結 (健康崩潰) ===</span>
-        <h2 style="font-size: 14px; color: #fff; margin-top: 3px;">${title}</h2>
-      </div>
-      <div class="dialog-box" style="margin-top: 8px; background:#fff5f6; border-color:#e63946;">${deathReason}</div>
-      
-      <div class="log-scroll-area">
-        <span style="font-size: 9.5px; color: #666; font-weight: 700; display: block; margin-bottom: 4px;">▶ 生前大事紀回顧：</span>
-        ${state.logs.map(log => `<div class="log-item">${log}</div>`).join('')}
-      </div>
-    </div>
-
-    <button id="restart-btn" class="pixel-btn" style="background: #e63946; color: #ffffff; text-align: center; margin-top: 10px;">
-      🔄 帶著教訓開啟下一世 (RESTART)
-    </button>
-  `;
-  if (canvas) {
-    canvas.innerHTML = html;
-    const restartBtn = document.getElementById('restart-btn');
-    if (restartBtn) restartBtn.onclick = renderEraSelect;
-  }
+  // 彈出榮譽終章結算證書彈窗
+  showEndingCertificateModal(badgeInfo, deathReason, true);
 }
 
 // 正常壽終正寢結算
 function renderEnding() {
-  const canvas = document.getElementById('game-canvas');
-  let title = "【★ 踏實圓滿的一生 ★】";
-  let desc = `你在【${state.birthCountry.name}】度過了跌宕起伏但無悔的一生，守護住了至親至愛與內心的安寧。`;
+  let badgeKey = 'peaceful_elder';
 
   if (state.stats.money >= 100 && state.stats.happiness >= 75) {
-    title = "【★ 跨世紀傳奇巨擘 ★】";
-    desc = "你兼顧了極致財富與心靈自由，在國家與時代的浪潮裡活出了無數人敬仰的傳奇！";
+    badgeKey = 'legend_wealth';
   } else if (state.stats.intellect >= 85) {
-    title = "【★ 時代先鋒智者 ★】";
-    desc = "你的卓越認知與專業成就，為這片土地與下一代留下了寶貴的思想遺產。";
+    badgeKey = 'master_mind';
   } else if (state.stats.happiness >= 85) {
-    title = "【★ 終極通透的自在靈魂 ★】";
-    desc = "無論時代如何變遷，你一生始終溫柔真誠，活出了最高境界的心靈自洽！";
+    badgeKey = 'free_soul';
   }
 
+  const badgeInfo = titleArtworks[badgeKey];
+  const desc = `你在【${state.birthCountry.name}】度過了跌宕起伏但無悔的一生，守護住了至親至愛與內心的安寧。${badgeInfo.desc}`;
+
   saveAchievement({
-    title,
+    title: badgeInfo.title,
+    artIcon: badgeInfo.icon,
     date: new Date().toLocaleDateString(),
     country: state.birthCountry.name,
     flagUrl: state.birthCountry.flagUrl,
     family: state.familyBackground.name,
-    desc
+    desc: desc
   });
+
+  showEndingCertificateModal(badgeInfo, desc, false);
+}
+
+// ==========================================================
+// 🏆 彈出專屬「人生終章證書」結算動畫彈窗 (特製插圖與蓋印)
+// ==========================================================
+function showEndingCertificateModal(badgeInfo, customDesc, isPremature) {
+  const modal = document.createElement('div');
+  modal.className = 'ending-modal-overlay';
+
+  modal.innerHTML = `
+    <div class="ending-certificate-card">
+      <div class="ending-stamp">${badgeInfo.stamp}</div>
+      <div class="ending-cert-badge">CERTIFICATE OF LIFE · 人生終章結算</div>
+      
+      <div class="ending-art-box">
+        <div class="ending-art-icon">${badgeInfo.icon}</div>
+      </div>
+
+      <h2 class="ending-cert-title">${badgeInfo.title}</h2>
+      <div class="ending-cert-desc">${customDesc}</div>
+
+      <div style="font-size: 11px; color: #7f6e57; margin-bottom: 14px;">
+        降生國度: <strong>${state.birthCountry.name}</strong> · 出身: <strong>${state.familyBackground.name}</strong><br>
+        終局資產: <strong>${state.stats.money} 萬</strong> | 幸福: <strong>${state.stats.happiness}</strong> | 智力: <strong>${state.stats.intellect}</strong>
+      </div>
+
+      <button id="view-timeline-btn" class="pixel-btn" style="background: #4a483e; color: #fff; text-align: center; padding: 11px;">
+        📜 查閱生前大事紀 (VIEW MEMOIRS)
+      </button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  document.getElementById('view-timeline-btn').onclick = () => {
+    modal.style.transition = 'opacity 0.4s ease';
+    modal.style.opacity = '0';
+    setTimeout(() => {
+      modal.remove();
+      renderEndingScreen(badgeInfo, customDesc, isPremature);
+    }, 400);
+  };
+}
+
+// 掌機內屏幕結局面板
+function renderEndingScreen(badgeInfo, desc, isPremature) {
+  const canvas = document.getElementById('game-canvas');
+  const cardBorderColor = isPremature ? '#e63946' : 'rgba(0,0,0,0.15)';
 
   let html = `
     <div>
-      <div style="text-align: center; background: #ffffff; border: 2px solid rgba(0,0,0,0.15); border-radius: 8px; padding: 10px;">
-        <span style="font-size: 10px; font-weight: 900; display: block; letter-spacing: 1px;">=== 人生終章圓滿結算 ===</span>
-        <h2 style="font-size: 14px; margin-top: 3px;">${title}</h2>
+      <div style="text-align: center; background: #ffffff; border: 2px solid ${cardBorderColor}; border-radius: 8px; padding: 10px;">
+        <div style="font-size: 26px; margin-bottom: 2px;">${badgeInfo.icon}</div>
+        <span style="font-size: 10px; font-weight: 900; display: block; letter-spacing: 1px;">=== 人生終章結算 ===</span>
+        <h2 style="font-size: 13.5px; margin-top: 3px;">${badgeInfo.title}</h2>
       </div>
       <div class="dialog-box" style="margin-top: 8px;">${desc}</div>
       
@@ -1013,6 +1118,7 @@ function renderEnding() {
       🔄 開啟下一世輪迴 (RESTART)
     </button>
   `;
+
   if (canvas) {
     canvas.innerHTML = html;
     const restartBtn = document.getElementById('restart-btn');
@@ -1037,10 +1143,13 @@ function showHallOfFame() {
     ? '<p style="text-align:center; font-size:12px; color:#666;">暫未解鎖人生圖鑑，快去通關一次吧！</p>'
     : list.map((item) => `
         <div class="hof-item">
-          <img src="${item.flagUrl || 'https://flagcdn.com/w80/hk.png'}" class="flag-img-small" style="width:24px; height:16px;">
-          <div>
-            <strong style="font-size: 13px; color:#2c2f35;">${item.title}</strong>
-            <div style="font-size: 10px; color:#888; margin-top:2px;">${item.country} · ${item.family} (${item.date})</div>
+          <div class="hof-item-art">${item.artIcon || '📜'}</div>
+          <div style="flex-grow: 1;">
+            <strong style="font-size: 12.5px; color:#2c2f35;">${item.title}</strong>
+            <div style="font-size: 10px; color:#888; margin-top:2px;">
+              <img src="${item.flagUrl || 'https://flagcdn.com/w80/hk.png'}" class="flag-img-small">
+              ${item.country} · ${item.family} (${item.date})
+            </div>
             <div style="font-size: 10.5px; color:#555; margin-top:2px;">${item.desc}</div>
           </div>
         </div>
