@@ -26,7 +26,7 @@ body.bg-summer { background: #e5efe9 linear-gradient(135deg, #eef7f2 0%, #d8eae0
 body.bg-autumn { background: #ded6c5 linear-gradient(135deg, #f5ecd8 0%, #d3c7b2 100%); }
 body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc 100%); }
 
-/* 遊戲機本體 */
+/* 掌機外殼 */
 .gameboy-chassis {
   position: relative;
   width: 100%;
@@ -126,17 +126,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   border-radius: 4px;
 }
 
-.origin-badge {
-  display: inline-block;
-  background: #e9e4d6;
-  color: #555;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: 1px solid #d4cbb8;
-}
-
 .dialog-box {
   background: #ffffff;
   border: 2px solid rgba(0, 0, 0, 0.15);
@@ -206,7 +195,110 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 
 .hidden { display: none !important; }
 
-/* ================= 全屏爆裂抽卡 ================= */
+/* ==========================================================
+   🎲 命運輪盤滾動選國度動畫 (SLOT REVEAL ANIMATION)
+========================================================== */
+.roulette-screen-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(14, 11, 22, 0.95);
+  backdrop-filter: blur(14px);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: overlayDimIn 0.4s ease forwards;
+}
+
+.roulette-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.roulette-title h2 {
+  font-size: 20px;
+  color: #f7e6c4;
+  letter-spacing: 2px;
+  text-shadow: 0 0 16px rgba(247, 230, 196, 0.5);
+  margin-bottom: 6px;
+}
+
+.roulette-title p {
+  font-size: 12px;
+  color: #a89f91;
+}
+
+.country-grid-stage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 480px;
+  width: 100%;
+}
+
+.country-box {
+  background: #252230;
+  border: 2px solid #544b68;
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: all 0.12s ease;
+  opacity: 0.6;
+}
+
+.country-box .flag {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+.country-box .name {
+  font-size: 14px;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.country-box .desc {
+  font-size: 10.5px;
+  color: #a89f91;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* 閃爍高亮中 */
+.country-box.active-flash {
+  opacity: 1;
+  border-color: #ffd166;
+  background: #3c3246;
+  transform: scale(1.04);
+  box-shadow: 0 0 20px rgba(255, 209, 102, 0.5);
+}
+
+/* 最終鎖定定格 */
+.country-box.final-locked {
+  opacity: 1;
+  border: 3px solid #ff758f;
+  background: #442a3a;
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(255, 117, 143, 0.8);
+}
+
+.roulette-proceed-btn {
+  margin-top: 26px;
+  background: #f7e6c4;
+  color: #211c2e;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 34px;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
+  transition: all 0.2s ease;
+}
+
+/* ================= 3D 爆裂抽卡 ================= */
 .gacha-screen-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -218,20 +310,7 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   align-items: center;
   justify-content: center;
   padding: 20px;
-  animation: overlayDimIn 0.5s ease forwards;
 }
-
-.gacha-title-banner {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.gacha-title-banner h2 {
-  font-size: 20px; color: #f7e6c4; letter-spacing: 2px;
-  text-shadow: 0 0 16px rgba(247, 230, 196, 0.6); margin-bottom: 6px;
-}
-
-.gacha-title-banner p { font-size: 12px; color: #a89f91; }
 
 .gacha-cards-stage {
   display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
@@ -245,11 +324,11 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   animation: cardBurstOut 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-.gacha-card-item:nth-child(1) { animation-delay: 0.15s; }
-.gacha-card-item:nth-child(2) { animation-delay: 0.25s; }
-.gacha-card-item:nth-child(3) { animation-delay: 0.35s; }
-.gacha-card-item:nth-child(4) { animation-delay: 0.45s; }
-.gacha-card-item:nth-child(5) { animation-delay: 0.55s; }
+.gacha-card-item:nth-child(1) { animation-delay: 0.1s; }
+.gacha-card-item:nth-child(2) { animation-delay: 0.2s; }
+.gacha-card-item:nth-child(3) { animation-delay: 0.3s; }
+.gacha-card-item:nth-child(4) { animation-delay: 0.4s; }
+.gacha-card-item:nth-child(5) { animation-delay: 0.5s; }
 
 .gacha-card-inner {
   position: absolute; width: 100%; height: 100%; border-radius: 14px;
@@ -280,7 +359,7 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   cursor: pointer; box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
 }
 
-/* ================= 🏆 人生紀念冊 (圖鑑庫) ================= */
+/* 紀念冊 */
 .hall-of-fame-modal {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
