@@ -1,319 +1,393 @@
-// 寫實人生模擬器：全年代、全生命週期劇本庫
+// 寫實人生模擬器：超詳細細分年齡、命運轉折版
 const gameData = {
   eras: [
-    {
-      id: '1970',
-      title: '【1970 年代】經濟起飛與拼搏期',
-      icon: '🏭',
-      desc: '物資相對匱乏，但處處係白手興家嘅機會。人情味濃，靠雙手同膽識打拼天下。',
-      initialStats: { intellect: 45, eq: 55, health: 65, happiness: 55, money: 20 },
-      startEventId: 'e1970_infant'
-    },
     {
       id: '2000',
       title: '【千禧 2000 年】互聯網與轉型潮',
       icon: '📟',
-      desc: '無智能手機嘅純真童年，遇上資訊爆炸同全球化，充滿機遇與變革。',
-      initialStats: { intellect: 50, eq: 50, health: 60, happiness: 65, money: 40 },
-      startEventId: 'e2000_infant'
+      desc: '無智慧型手機嘅實體童年，撞正網絡科技爆發與現代城市轉型，充滿無限變數。',
+      initialStats: { intellect: 50, eq: 50, health: 60, happiness: 65, money: 30 },
+      startEventId: 'e2000_3'
+    },
+    {
+      id: '1970',
+      title: '【1970 年代】白手興家與拼搏期',
+      icon: '🏭',
+      desc: '物資匱乏但遍地黃金，全靠一雙手同拚搏意志打天下，考驗意志力與膽識。',
+      initialStats: { intellect: 45, eq: 55, health: 65, happiness: 55, money: 15 },
+      startEventId: 'e1970_6'
     },
     {
       id: '2010',
       title: '【2010 年代後】數碼原生與內卷期',
       icon: '📱',
-      desc: '出生就接觸平板與演算法，物質極度豐富，但學業競爭與心理壓力亦前所未有。',
-      initialStats: { intellect: 60, eq: 45, health: 50, happiness: 45, money: 60 },
-      startEventId: 'e2010_infant'
+      desc: '出生自帶演算法與智慧螢幕，物質極度豐富，但學業與同輩壓力前所未有。',
+      initialStats: { intellect: 60, eq: 45, health: 50, happiness: 45, money: 50 },
+      startEventId: 'e2010_5'
     }
   ],
   events: {
-    // ================= 2000 千禧年主線 =================
-    'e2000_infant': {
+    // ==========================================
+    // 2000 千禧世代主線（超細分人生 9 大階段）
+    // ==========================================
+    'e2000_3': {
       age: 3,
-      stage: '幼兒啟蒙 (0-5歲)',
-      title: '【3歲】客廳裡的探索時光',
-      desc: '千禧年初，屋企買咗第一部大牛龜電視機同錄影帶。你平時喺屋企最鍾意：',
+      stage: '幼兒啟蒙期 (0-5歲)',
+      isCrucial: false,
+      title: '【3歲】客廳地板上的小小宇宙',
+      desc: '屋企剛買咗台大牛龜電視機同錄影帶機，平時大人返工，你喺客廳地墊最鍾意玩咩？',
       options: [
         {
-          text: '🧩 靜靜坐喺地墊玩積木、拼圖同拆舊玩具。',
-          effects: { intellect: 8, eq: -2, happiness: 5 },
-          log: '【3歲】你展現出對空間同結構嘅專注力，自得其樂。',
-          nextEventId: 'e2000_child'
+          text: '🧩 專注玩積木、拼圖，拆開舊收音機同玩具車摸索內部零件。',
+          effects: { intellect: 8, eq: -2, happiness: 6 },
+          log: '【3歲】你展現出超強的結構專注力，懂得自得其樂。',
+          nextEventId: 'e2000_7'
         },
         {
-          text: '🏃 喺屋企跑跑跳跳，成日跟住隔離屋小朋友落街捉伊人。',
-          effects: { health: 8, eq: 8, happiness: 10 },
-          log: '【3歲】你性格外向好動，成為街坊鄰里間嘅開心果。',
-          nextEventId: 'e2000_child'
+          text: '🏃 跑跑跳跳，成日跟住鄰居小朋友落街捉伊人、跑樓梯。',
+          effects: { health: 10, eq: 8, happiness: 8 },
+          log: '【3歲】你性格好動外向，成為街坊鄰里間的小開心果。',
+          nextEventId: 'e2000_7'
+        },
+        {
+          text: '🎨 攞住顏色筆喺全屋牆壁塗鴉，沉浸喺天馬行空嘅想像世界。',
+          effects: { happiness: 12, intellect: 4, eq: 4 },
+          log: '【3歲】你想像力豐富，對色彩同視覺世界特別敏感。',
+          nextEventId: 'e2000_7'
         }
       ]
     },
-    'e2000_child': {
-      age: 8,
-      stage: '童年才藝與課餘 (6-11歲)',
-      title: '【8歲】課餘興趣的起點',
-      desc: '小學三年級，學校同屋企鼓勵你報一個長期的課外活動：',
+
+    'e2000_7': {
+      age: 7,
+      stage: '小學童年與課餘技能 (6-11歲)',
+      isCrucial: false,
+      title: '【7歲】放學鐘聲響起之後',
+      desc: '小學二年級，學校課餘時間同屋企人都鼓勵你培養一門可以堅持一生的專長：',
       options: [
         {
-          text: '🎸 學木結他 / 鋼琴，培養音樂與節奏感。',
-          effects: { eq: 10, intellect: 5, happiness: 8, money: -5 },
-          log: '【8歲】你開始接觸樂器，指尖慢慢磨出繭，多咗一份文藝氣質。',
-          nextEventId: 'e2000_teen_exam'
+          text: '🎸 學木結他 / 鋼琴，每日放學風雨不改練指法。',
+          effects: { eq: 10, intellect: 6, happiness: 8, money: -5 },
+          log: '【7歲】指尖磨出硬繭，你多咗一份文藝感同對旋律的敏銳度。',
+          nextEventId: 'e2000_12'
         },
         {
-          text: '⚽ 加入校隊（游水／籃球／田徑），接受規律體能訓練。',
-          effects: { health: 15, eq: 6, intellect: -2, happiness: 5 },
-          log: '【8歲】風雨不改嘅訓練練就咗你強健嘅體魄與團隊精神。',
-          nextEventId: 'e2000_teen_exam'
+          text: '⚽ 加入田徑 / 籃球校隊，習慣規律汗水同競技對抗。',
+          effects: { health: 15, eq: 8, intellect: -2, happiness: 6 },
+          log: '【7歲】高強度體能訓練練就咗你強韌的體魄同不服輸的性格。',
+          nextEventId: 'e2000_12'
         },
         {
-          text: '💻 屋企裝咗寬頻，自己上網摸索電腦系統與論壇。',
-          effects: { intellect: 12, health: -5, eq: -3, happiness: 6 },
-          log: '【8歲】你提早成為網民，習慣透過互聯網吸收全世界嘅新資訊。',
-          nextEventId: 'e2000_teen_exam'
+          text: '🪀 沉迷四驅車、爆旋陀螺與掌機對戰，成為街頭孩子王。',
+          effects: { eq: 12, happiness: 15, intellect: 2, money: -3 },
+          log: '【7歲】你收穫咗最純粹的童年死黨，懂得點樣同各路人馬打交道。',
+          nextEventId: 'e2000_12'
+        },
+        {
+          text: '💻 屋企裝咗寬頻，成日偷偷上網摸索系統設定同網頁。',
+          effects: { intellect: 14, health: -6, happiness: 5 },
+          log: '【7歲】你提早成為初代網民，自學掌握咗豐富的數碼資訊。',
+          nextEventId: 'e2000_12'
         }
       ]
     },
-    'e2000_teen_exam': {
-      age: 17,
-      stage: '中學升學與文理抉擇 (16-18歲)',
-      title: '【17歲】公開試與志向抉擇',
-      desc: '高中最後階段，面對升學考試與未來人生方向，你將大部分精力投入在：',
+
+    'e2000_12': {
+      age: 12,
+      stage: '初中叛逆與自我定位 (12-15歲)',
+      isCrucial: false,
+      title: '【12歲】校服褲管與耳機裏的旋律',
+      desc: '踏入初中，身體急速發育，同輩壓力同自我意識爆發，你平時的精力主要放喺：',
       options: [
         {
-          text: '📚 苦讀文理主科，目標衝入頂尖大學的專業學科（醫/法/商/工程）。',
-          effects: { intellect: 15, health: -8, happiness: -5, eq: 2 },
-          log: '【17歲】你頂住巨大壓力考入理想大學，為專業路打下基石。',
-          nextEventId: 'e2000_uni_life'
+          text: '📚 默默做筆記苦讀，立志爭入精英班與重點名校高中。',
+          effects: { intellect: 14, eq: -2, health: -4, happiness: -4 },
+          log: '【12歲】你在成績榜名列前茅，但逐漸感受到升學競爭的枯燥。',
+          nextEventId: 'e2000_18'
         },
         {
-          text: '🎨 專注個人熱愛（設計／獨立創作／實用技能），唔盲目追分數。',
-          effects: { happiness: 15, eq: 8, intellect: 5, money: -5 },
-          log: '【17歲】你保持咗獨特嘅個人思維，走出與眾不同嘅升學路線。',
-          nextEventId: 'e2000_uni_life'
+          text: '🎧 買 MP3 戴耳機聽流行音樂與獨立樂隊，開始嘗試自己寫詞彈歌。',
+          effects: { eq: 12, happiness: 14, intellect: 4 },
+          log: '【12歲】你在音樂同感性世界搵到共鳴，建立起獨特的審美。',
+          nextEventId: 'e2000_18'
+        },
+        {
+          text: '🤝 同班上死黨稱兄道弟，日日放學落波地打街場至天黑。',
+          effects: { health: 12, eq: 10, happiness: 10, intellect: -4 },
+          log: '【12歲】你的人緣極佳，結識咗能夠講心事的一生好友。',
+          nextEventId: 'e2000_18'
         }
       ]
     },
-    'e2000_uni_life': {
-      age: 21,
-      stage: '大學與感情探索 (19-23歲)',
-      title: '【21歲】青春的交匯點',
-      desc: '大學或大專時期，生活自由度大增。面對初戀、社交圈與個人提升：',
+
+    'e2000_18': {
+      age: 18,
+      stage: '中學畢業與成年分水嶺 (18-19歲)',
+      isCrucial: true,
+      title: '【18歲】成人禮上的重大抉擇',
+      desc: '高中畢業，面對人生第一張極其關鍵的入場券，你的決定將徹底改變人生軌道：',
       options: [
         {
-          text: '❤️ 遇見志趣相投的伴侶，認真經營一段穩定深厚的感情。',
-          effects: { happiness: 18, eq: 12, money: -8 },
-          log: '【21歲】你收穫咗珍貴的愛情，學識點樣同另一個人互相包容成長。',
-          nextEventId: 'e2000_early_career'
+          text: '🎓 拼盡全力考入傳統名牌大學實用專業（商科/法律/醫療/工程）。',
+          effects: { intellect: 18, money: -10, health: -6, eq: 4 },
+          log: '【18歲 ⚠️ 人生轉折】你拿到了主流社會的精英入場券，開啟高壓專業養成。',
+          nextEventId: 'e2000_23'
         },
         {
-          text: '💼 保持單身，時間全副投入實習、考專業牌照或兼職儲錢。',
-          effects: { money: 20, intellect: 10, eq: 5, happiness: -3 },
-          log: '【21歲】你提早累積職場資本與積蓄，對未來有清晰規劃。',
-          nextEventId: 'e2000_early_career'
+          text: '🎨 堅持攻讀自己熱愛的冷門或藝術設計學院，探索個人創作。',
+          effects: { happiness: 16, eq: 10, intellect: 8, money: -8 },
+          log: '【18歲 ⚠️ 人生轉折】你拒絕主流模板，選擇用熱愛同創意定義自我。',
+          nextEventId: 'e2000_23'
+        },
+        {
+          text: '💼 放棄長遠升學，直接投身職場或學門扎實技術，提早累積本金。',
+          effects: { money: 25, eq: 12, health: 4, intellect: -4 },
+          log: '【18歲 ⚠️ 人生轉折】你提早踏入社會大熔爐，比同齡人更早體會現實與金錢價值。',
+          nextEventId: 'e2000_23'
+        },
+        {
+          text: '💻 利用自學的編程或自媒體技能，嘗試在互聯網展開獨立接案與小項目。',
+          effects: { intellect: 15, happiness: 12, money: 10, health: -5 },
+          log: '【18歲 ⚠️ 人生轉折】你踩上互聯網自主創業浪潮，過上非傳統的自由節奏。',
+          nextEventId: 'e2000_23'
         }
       ]
     },
-    'e2000_early_career': {
-      age: 26,
-      stage: '職場初期與資產選擇 (24-30歲)',
-      title: '【26歲】出社會後的第一筆重大預算',
-      desc: '工作咗幾年手頭有一筆積蓄，面對生活質素與資產分配的考驗：',
+
+    'e2000_23': {
+      age: 23,
+      stage: '初入職場與第一桶金 (20-25歲)',
+      title: '【23歲】第一張工資單與現實重拳',
+      desc: '踏出校園正式全職工作，月薪落袋後除去租金開支，你如何對待自己的生活：',
       options: [
         {
-          text: '🚗 買一部二手車代步，提升生活半徑與假日自駕質素。',
-          effects: { happiness: 12, money: -18, eq: 4 },
-          log: '【26歲】你買咗人生第一部車，換來假期說走就走的自由。',
-          nextEventId: 'e2000_midlife'
+          text: '🏢 進入大型跨國企業做基層，自願加班卷業績爭取三年內升職。',
+          effects: { money: 20, intellect: 10, health: -10, happiness: -6 },
+          log: '【23歲】你以健康同休閒為代價，在職場梯級上快速向上爬。',
+          nextEventId: 'e2000_28'
         },
         {
-          text: '📈 嚴格控制開支，全數投入穩健指數基金或藍籌作長期複利。',
-          effects: { money: 25, intellect: 8, happiness: -2 },
-          log: '【26歲】你建立起自律的資產配置系統，本金開始穩定滾動。',
-          nextEventId: 'e2000_midlife'
+          text: '☕ 搵份朝九晚五壓力小的普通工作，將精力留畀放工後的健身、興趣與社交。',
+          effects: { happiness: 18, health: 10, money: 5, eq: 6 },
+          log: '【23歲】你過著極度平衡的生活，精神狀態非常充實健康。',
+          nextEventId: 'e2000_28'
         },
         {
-          text: '🏠 同伴侶夾份供首期，合力買入屬於自己嘅第一個小單位。',
-          effects: { happiness: 15, money: -30, eq: 10, health: -5 },
-          log: '【26歲】你孭起樓按供款，雖然壓力大，但擁有咗安穩的家。',
-          nextEventId: 'e2000_midlife'
+          text: '📈 極限自律節儉，將所有剩餘工資定期定額投進全球指數或股票學習理財。',
+          effects: { money: 25, intellect: 12, happiness: -2 },
+          log: '【23歲】你提早理解資產與複利邏輯，累積起堅實的財務防護墊。',
+          nextEventId: 'e2000_28'
         }
       ]
     },
-    'e2000_midlife': {
-      age: 40,
-      stage: '中年轉折與責任 (35-50歲)',
-      title: '【40歲】中流砥柱與身心平衡',
-      desc: '步入中年，事業步入成熟期，家庭與身體亦開始發出不同訊號：',
+
+    'e2000_28': {
+      age: 28,
+      stage: '成家立業與資產關鍵 (26-32歲)',
+      isCrucial: true,
+      title: '【28歲】婚姻、車樓與資產大分水嶺',
+      desc: '身邊朋友陸續結婚派帖，長輩催促買樓上車，面對手頭第一筆可觀積蓄，你選擇：',
       options: [
         {
-          text: '🧗 勇敢跳出大公司舒適圈，利用累積的人脈與資本獨立創業。',
-          effects: { money: 35, intellect: 10, health: -12, happiness: 8 },
-          log: '【40歲】你冒險開展個人事業，打拼出屬於自己的一片天空。',
-          nextEventId: 'e2000_elder'
+          text: '💍 同相愛多年的另一半拉埋天窗，合力供首期置業築起愛巢。',
+          effects: { happiness: 22, eq: 14, money: -35, health: -5 },
+          log: '【28歲 ⚠️ 人生轉折】你揹起三十年房貸責任，但擁有咗溫暖且穩固的家庭港灣。',
+          nextEventId: 'e2000_35'
         },
         {
-          text: '🧘 退居二線追求 Work-Life Balance，重拾健身、結他與家庭生活。',
-          effects: { health: 18, happiness: 22, money: 5, eq: 8 },
-          log: '【40歲】你睇通人生優先次序，保持極佳的身心狀態與家庭關係。',
-          nextEventId: 'e2000_elder'
+          text: '🚗 堅持單身或租樓同居，買入心儀已久的自駕車，追求高流動性與生活享受。',
+          effects: { happiness: 16, money: -18, eq: 8, health: 4 },
+          log: '【28歲 ⚠️ 人生轉折】你拒絕被磚頭鎖死人生，享受假期說走就走的自駕自由。',
+          nextEventId: 'e2000_35'
+        },
+        {
+          text: '💼 謝絕買車買樓等負債，將資金全副保留，作為日後全職創業或跳槽深造的籌碼。',
+          effects: { money: 35, intellect: 12, happiness: 4, eq: 4 },
+          log: '【28歲 ⚠️ 人生轉折】你保持高度的資本機動性，時刻準備捕捉時代新機會。',
+          nextEventId: 'e2000_35'
         }
       ]
     },
-    'e2000_elder': {
+
+    'e2000_35': {
+      age: 35,
+      stage: '中年轉折與責任承擔 (33-45歲)',
+      title: '【35歲】中流砥柱的危機與突圍',
+      desc: '體力開始不如二十出頭，上有老下有小，職場升遷亦進入天花板：',
+      options: [
+        {
+          text: '🧗 勇敢跳出大機構，利用十幾年累積的人脈與技術獨立創業開公司。',
+          effects: { money: 45, intellect: 12, health: -14, happiness: 8 },
+          log: '【35歲】你承擔巨大風險博取個人上限，成功開闢出個人事業王國。',
+          nextEventId: 'e2000_48'
+        },
+        {
+          text: '🛡️ 守好現有管理職位，專注公司內部政治與安穩收入，重心全面回歸陪伴家人。',
+          effects: { happiness: 18, eq: 10, health: 6, money: 15 },
+          log: '【35歲】你選擇安穩防守，見證子女成長同父母安康，內心平靜。',
+          nextEventId: 'e2000_48'
+        },
+        {
+          text: '🧘 毅然轉換跑道，降薪去從事心底真正熱愛但過去不敢碰的志業。',
+          effects: { happiness: 25, health: 12, money: -15, eq: 8 },
+          log: '【35歲】你打破中年魔咒，為自己的靈魂真正活了一次。',
+          nextEventId: 'e2000_48'
+        }
+      ]
+    },
+
+    'e2000_48': {
+      age: 48,
+      stage: '人生大關與健康洗禮 (46-58歲)',
+      isCrucial: true,
+      title: '【48歲】暴風雨後的自我審視',
+      desc: '一場突如其來的體檢報告紅字或經濟週期波動，敲響了人生的警鐘：',
+      options: [
+        {
+          text: '🩺 徹底放下執念，開始每週高強度運動與嚴格飲食，重拾強健體格。',
+          effects: { health: 25, happiness: 18, money: -5 },
+          log: '【48歲 ⚠️ 人生轉折】你將健康重新放回第一位，逆轉身體機能，狀態煥然一新。',
+          nextEventId: 'e2000_65'
+        },
+        {
+          text: '💰 敏銳把握市場週期低谷，進行果斷的資產重組與長期佈局。',
+          effects: { money: 60, intellect: 10, health: -8, happiness: 4 },
+          log: '【48歲 ⚠️ 人生轉折】你憑藉半生積累的睿智完成資本躍升，真正擺脫財務束縛。',
+          nextEventId: 'e2000_65'
+        }
+      ]
+    },
+
+    'e2000_65': {
       age: 65,
-      stage: '晚年與人生收穫 (60歲+)',
-      title: '【65歲】夕陽下的漫步',
-      desc: '到達法定退休年齡，回望大半生波瀾起伏嘅選擇：',
+      stage: '花甲榮休與人生結算 (60歲+)',
+      isCrucial: false,
+      title: '【65歲】長椅上的夕陽回甘',
+      desc: '迎來法定退休之年，回望六十載風雨，你打算如何安放餘生：',
       options: [
         {
-          text: '🌍 帶著伴侶環遊世界，將多年積蓄化作開闊回憶。',
-          effects: { happiness: 25, money: -20, health: 5 },
-          log: '【65歲】你同伴侶踏遍各地，人生無憾。',
+          text: '🌍 帶著伴侶與背包環遊列國，用雙腳睇晒大半生未見過的世界風光。',
+          effects: { happiness: 30, money: -25, health: 6 },
+          log: '【65歲】你活得自在通透，將千金散盡化作胸襟與永恆回憶。',
           nextEventId: 'end'
         },
         {
-          text: '🏡 回歸寧靜田園生活，專注個人愛好與提攜後輩。',
-          effects: { happiness: 20, health: 12, eq: 10 },
-          log: '【65歲】你享受安寧的晚年生活，深受晚輩尊敬。',
+          text: '🏡 安居靜謐田園小宅，每日種花、彈結他、著書立說傳承經驗給年輕人。',
+          effects: { happiness: 24, health: 15, eq: 12 },
+          log: '【65歲】你在平淡雅致中安享天倫，深受後輩敬佩與愛戴。',
           nextEventId: 'end'
         }
       ]
     },
 
-    // ================= 1970 年代主線 =================
-    'e1970_infant': {
+    // ==========================================
+    // 1970 年代主線（白手興家拼搏線）
+    // ==========================================
+    'e1970_6': {
       age: 6,
-      stage: '童年幫補家計 (0-10歲)',
-      title: '【6歲】唐樓裏的穿膠花歲月',
-      desc: '70年代物質簡樸，一家大細圍埋喺客廳做家庭手工幫補家計：',
+      stage: '童年生活 (0-10歲)',
+      isCrucial: false,
+      title: '【6歲】工廠區的穿膠花歲月',
+      desc: '一家大細圍在木枱前趕工幫補家計，你決定點樣度過放學時光：',
       options: [
         {
-          text: '✋ 乖乖幫屋企穿膠花、剪線頭，鍛鍊手藝同耐性。',
-          effects: { eq: 10, money: 10, intellect: 4, happiness: 5 },
-          log: '【6歲】你早早體會到賺錢艱難，培養出堅韌耐勞嘅品格。',
-          nextEventId: 'e1970_teen'
+          text: '✋ 乖乖坐定定幫阿媽剪線頭、穿膠花，分擔生計。',
+          effects: { money: 12, eq: 10, intellect: 4, happiness: 5 },
+          log: '【6歲】你早早體會金錢來之不易，磨練出過人耐性。',
+          nextEventId: 'e1970_16'
         },
         {
-          text: '🏃 跑上天台同後巷同鄰居細路跳橡筋繩、打波子。',
-          effects: { health: 15, happiness: 12, eq: 5 },
-          log: '【6歲】你擁有充滿野性同笑聲嘅街頭童年。',
-          nextEventId: 'e1970_teen'
+          text: '🏃 跑上天台同鄰居細路鬥波子、跳橡筋繩，四處野跑。',
+          effects: { health: 15, happiness: 12, eq: 6 },
+          log: '【6歲】你擁有一副強健體格同充滿市井笑聲的童年。',
+          nextEventId: 'e1970_16'
         }
       ]
     },
-    'e1970_teen': {
+    'e1970_16': {
       age: 16,
       stage: '青年抉擇 (15-20歲)',
-      title: '【16歲】工廠打工還是夜校苦讀',
-      desc: '工業高速增長，身邊同學紛紛投身社會，你選擇：',
+      isCrucial: true,
+      title: '【16歲】學徒還是夜校夜行者',
+      desc: '輕工業如日中天，身邊同學紛紛投身社會，你的抉擇是：',
       options: [
         {
-          text: '🏭 入工廠/洋行跟師傅學一門專業技術（如車床、印刷、維修）。',
-          effects: { money: 20, intellect: 8, health: -5 },
-          log: '【16歲】你學得一技之長，好快能夠自立生活。',
-          nextEventId: 'e1970_career'
+          text: '🔧 跟隨經驗豐富的師傅進工廠學機械維修與模具，掌握核心硬技術。',
+          effects: { money: 20, intellect: 10, health: -4 },
+          log: '【16歲 ⚠️ 人生轉折】你掌握了一技之長，在工業起飛年代迅速站穩陣腳。',
+          nextEventId: 'e1970_30'
         },
         {
-          text: '📖 日間打散工，夜晚去夜校苦讀英文與商科。',
-          effects: { intellect: 18, eq: 8, health: -8, happiness: 5 },
-          log: '【16歲】你憑毅力補足學歷，為轉型現代商貿打下基礎。',
-          nextEventId: 'e1970_career'
+          text: '📖 白天做初級文員雜工，夜晚堅持去夜校苦學英語與商業會計。',
+          effects: { intellect: 20, eq: 10, health: -8, happiness: 6 },
+          log: '【16歲 ⚠️ 人生轉折】你用汗水補足學歷，叩開了現代外貿洋行的大門。',
+          nextEventId: 'e1970_30'
         }
       ]
     },
-    'e1970_career': {
+    'e1970_30': {
       age: 30,
-      stage: '黃金年代機遇 (25-35歲)',
-      title: '【30歲】乘上時代的浪潮',
-      desc: '80-90年代股市與地產大爆發，各行各業遍地黃金：',
+      stage: '黃金時代機遇 (28-40歲)',
+      isCrucial: true,
+      title: '【30歲】經濟起飛的滔天巨浪',
+      desc: '地產與貿易大爆發，面對處處是商機的年代：',
       options: [
         {
-          text: '🏢 大膽借貸頂手一間小店舖／小貿易行，自己做老闆。',
-          effects: { money: 45, eq: 12, health: -10, happiness: 10 },
-          log: '【30歲】你踩中經濟起飛紅利，事業急速擴張。',
-          nextEventId: 'e1970_elder'
+          text: '🏭 大膽向銀行抵押，頂手成立自己的小工廠與貿易批發行。',
+          effects: { money: 65, intellect: 10, health: -14, happiness: 10 },
+          log: '【30歲 ⚠️ 人生轉折】你踩中時代最大紅利，白手興家躍升為民營企業家。',
+          nextEventId: 'end'
         },
         {
-          text: '🏠 踏實儲錢買入第一層樓，專注家庭安穩。',
-          effects: { money: 30, happiness: 18, health: 8 },
-          log: '【30歲】你享受咗資產升值帶來的紅利，生活無憂。',
-          nextEventId: 'e1970_elder'
-        }
-      ]
-    },
-    'e1970_elder': {
-      age: 65,
-      stage: '安享晚年 (60歲+)',
-      title: '【65歲】歲月神偷',
-      desc: '經歷過時代風雲變幻，你坐喺茶樓回顧一生：',
-      options: [
-        {
-          text: '🍵 每日同老友記飲茶落公園落棋，安享天倫。',
-          effects: { happiness: 20, health: 10 },
-          log: '【65歲】你過著平淡富足的晚年。',
+          text: '🏠 踏實置辦市區核心房產，專注守護家庭與安穩薪水。',
+          effects: { money: 45, happiness: 22, health: 8 },
+          log: '【30歲 ⚠️ 人生轉折】你享受到了城市資產升值的巨大果實，生活無憂。',
           nextEventId: 'end'
         }
       ]
     },
 
-    // ================= 2010 年代後主線 =================
-    'e2010_infant': {
+    // ==========================================
+    // 2010 年代後主線（數碼原生與內卷）
+    // ==========================================
+    'e2010_5': {
       age: 5,
-      stage: '幼兒啟蒙 (0-6歲)',
-      title: '【5歲】平板螢幕與興趣班',
-      desc: '出生於智慧型裝置普及年代，家長安排滿滿的課表：',
+      stage: '幼童教育 (0-6歲)',
+      isCrucial: false,
+      title: '【5歲】演算法下的童年啟蒙',
+      desc: '出生即有平板電腦與演算法推送，面對滿滿的早教課程：',
       options: [
         {
-          text: '📱 自小熟練操作 iPad 睇科普與外語動畫。',
-          effects: { intellect: 12, health: -6, eq: -4 },
-          log: '【5歲】你極早建立資訊搜尋能力，但對螢幕產生依賴。',
-          nextEventId: 'e2010_teen'
+          text: '📱 熟練操作智慧裝置自學外語同科普短片。',
+          effects: { intellect: 14, health: -6, eq: -4 },
+          log: '【5歲】你極早建立資訊搜索意識，但對螢幕依賴加深。',
+          nextEventId: 'e2010_16'
         },
         {
-          text: '🛹 拒絕螢幕，堅持報名攀石、游水同戶外體適能。',
-          effects: { health: 16, eq: 8, happiness: 10 },
-          log: '【5歲】你擁有極佳體能協調，結識咗好多戶外同伴。',
-          nextEventId: 'e2010_teen'
+          text: '🛹 拒絕螢幕，堅持每週參加攀石、滑板與戶外體適能訓練。',
+          effects: { health: 18, eq: 8, happiness: 12 },
+          log: '【5歲】你擁有一流的神經協調與強健身軀。',
+          nextEventId: 'e2010_16'
         }
       ]
     },
-    'e2010_teen': {
+    'e2010_16': {
       age: 16,
-      stage: '中學時期 (13-18歲)',
-      title: '【16歲】演算法世界的自我定位',
-      desc: '社交平台與短影音盛行，同輩間焦慮與流量競爭加劇：',
+      stage: '青年賽道 (14-18歲)',
+      isCrucial: true,
+      title: '【16歲】流量世界與自我救贖',
+      desc: '短影音同社交平台主導的世界，同輩焦慮拉滿：',
       options: [
         {
-          text: '🎥 發揮個人特長自製高質自媒體內容，經營個人品牌。',
-          effects: { money: 25, eq: 15, intellect: 8, health: -6 },
-          log: '【16歲】你成為年輕創作者，提早理解流量與商業邏輯。',
-          nextEventId: 'e2010_early_career'
-        },
-        {
-          text: '🧠 屏蔽社交雜音，專心研究 AI 工具與硬核科學知識。',
-          effects: { intellect: 22, happiness: 6, eq: -2 },
-          log: '【16歲】你具備超越同齡人的技術視野。',
-          nextEventId: 'e2010_early_career'
-        }
-      ]
-    },
-    'e2010_early_career': {
-      age: 25,
-      stage: '青年職場 (20-30歲)',
-      title: '【25歲】遠距工作與自由人生',
-      desc: 'AI 普及與新型工作模式下，你選擇的工作模式：',
-      options: [
-        {
-          text: '💻 成為數字遊民（Digital Nomad），邊環球旅行邊遠端接案。',
-          effects: { happiness: 24, eq: 14, money: 10, health: 8 },
-          log: '【25歲】你打破地域限制，過上高度自主的自由職業生涯。',
+          text: '🎥 發揮審美個人特長創作獨立內容，建立起個人影響力。',
+          effects: { money: 30, eq: 16, intellect: 8, health: -6 },
+          log: '【16歲 ⚠️ 人生轉折】你成為年輕創作者，提早看清商業與網絡運作法則。',
           nextEventId: 'end'
         },
         {
-          text: '🏢 投身核心科技研發企業，參與前沿項目。',
-          effects: { money: 35, intellect: 18, health: -10 },
-          log: '【25歲】你在行業核心領域佔據一席之地。',
+          text: '🧠 屏蔽社交雜音，深耕 AI 科技與數學演算法，追求硬核突破。',
+          effects: { intellect: 25, happiness: 8, eq: 2 },
+          log: '【16歲 ⚠️ 人生轉折】你掌握前沿底層技術，成為下一代技術弄潮兒。',
           nextEventId: 'end'
         }
       ]
@@ -329,13 +403,13 @@ let state = {
   currentEventId: null
 };
 
-// 更新 5 大數值面板
+// 5 大寫實數值即時更新
 function updateStatsUI() {
   const panel = document.getElementById('stats-panel');
   if (!panel) return;
 
   panel.innerHTML = `
-    <div class="stat-box"><span class="stat-intellect">★ 智商:</span><span class="stat-val">${state.stats.intellect}</span></div>
+    <div class="stat-box"><span class="stat-intellect">★ 智力:</span><span class="stat-val">${state.stats.intellect}</span></div>
     <div class="stat-box"><span class="stat-charm">◆ 情商:</span><span class="stat-val">${state.stats.eq}</span></div>
     <div class="stat-box"><span class="stat-physique">♥ 健康:</span><span class="stat-val">${state.stats.health}</span></div>
     <div class="stat-box"><span class="stat-happiness">☺ 幸福:</span><span class="stat-val">${state.stats.happiness}</span></div>
@@ -355,8 +429,8 @@ function renderEraSelect() {
   let html = `
     <div style="margin: auto 0;">
       <div style="text-align: center; margin-bottom: 10px;">
-        <span class="tag-badge">寫實人生模擬</span>
-        <p style="font-size: 11px; color: #86b564; margin-top: 6px;">選擇你的出生年代背景：</p>
+        <span class="tag-badge">全寫實人生模擬</span>
+        <p style="font-size: 11px; color: #86b564; margin-top: 6px;">選擇出生時代，啟動漫長人生：</p>
       </div>
   `;
 
@@ -378,7 +452,7 @@ function renderEraSelect() {
   }
 }
 
-// 開始遊戲
+// 開始新人生
 function startGame(eraId) {
   const statsPanel = document.getElementById('stats-panel');
   const subHeader = document.getElementById('sub-header');
@@ -386,7 +460,7 @@ function startGame(eraId) {
 
   state.currentEra = era;
   state.stats = { ...era.initialStats };
-  state.logs = [`【0歲 出生】你在 ${era.title} 呱呱墜地。`];
+  state.logs = [`【0歲 誕生】你在 ${era.title} 正式降臨人世。`];
   state.currentEventId = era.startEventId;
 
   if (subHeader) subHeader.innerText = `時代背景: ${era.id} 年`;
@@ -395,7 +469,7 @@ function startGame(eraId) {
   renderEvent(state.currentEventId);
 }
 
-// 渲染事件節點
+// 渲染事件節點（支援轉折點警示高亮）
 function renderEvent(eventId) {
   const canvas = document.getElementById('game-canvas');
   if (eventId === 'end') {
@@ -404,8 +478,15 @@ function renderEvent(eventId) {
   }
 
   const event = gameData.events[eventId];
+  const crucialBanner = event.isCrucial 
+    ? `<div style="background: #ef4444; color: #fff; font-size: 10px; font-weight: bold; text-align: center; padding: 3px; margin-bottom: 6px; border: 1px solid #7f1d1d; letter-spacing: 1px;">
+        ⚠️ 重要人生命運轉折點 ⚠️
+       </div>`
+    : '';
+
   let html = `
     <div>
+      ${crucialBanner}
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
         <span class="tag-badge">${event.stage || '人生節點'}</span>
         <span style="font-size: 10px; color: #f59e0b; font-weight: bold;">【${event.age} 歲】</span>
@@ -435,7 +516,7 @@ function renderEvent(eventId) {
   }
 }
 
-// 處理選擇與數值變化
+// 處理選擇與數值結算
 function chooseOption(eventId, optionIdx) {
   const event = gameData.events[eventId];
   const opt = event.options[optionIdx];
@@ -448,25 +529,25 @@ function chooseOption(eventId, optionIdx) {
   renderEvent(opt.nextEventId);
 }
 
-// 渲染人生結局
+// 渲染人生總結結局
 function renderEnding() {
   const canvas = document.getElementById('game-canvas');
   
   let title = "【★ 踏實圓滿的人生 ★】";
   let desc = "你在時代的沉浮中守護住了內心的平靜與家庭的溫暖。";
 
-  if (state.stats.money >= 80 && state.stats.happiness >= 70) {
-    title = "【★ 財富與自由雙贏者 ★】";
-    desc = "你兼顧了物質財富與精神滿足，達成了世俗與自我價值的極致平衡！";
+  if (state.stats.money >= 90 && state.stats.happiness >= 75) {
+    title = "【★ 財富與自由極致者 ★】";
+    desc = "你兼顧了物質豐盛與心靈自由，活成了無數人夢寐以求的通透境界！";
   } else if (state.stats.intellect >= 85) {
-    title = "【★ 卓越智慧先驅 ★】";
-    desc = "你的專注與深度認知，讓你在專業領域留下了深刻的印記！";
+    title = "【★ 睿智時代先鋒 ★】";
+    desc = "你的專注與深度洞察力，讓你在自己開闢的領域留下了不可磨滅的印記！";
   } else if (state.stats.happiness >= 85) {
     title = "【★ 靈魂自由旅人 ★】";
-    desc = "你從未被世俗框架束縛，活出了最通透、最快樂的人生！";
-  } else if (state.stats.health < 40) {
+    desc = "你從未被任何世俗的條條框框捆綁，活出了最純粹、最無悔的自己！";
+  } else if (state.stats.health < 45) {
     title = "【★ 燃燒過度的奮鬥者 ★】";
-    desc = "你為事業同生活付出一切，但身體亦發出了疲累的警告，值得停低腳步好好休養。";
+    desc = "你為事業與周遭人付出了全部心血，但也耗盡了身體活力，值得好好歇息。";
   }
 
   let html = `
@@ -494,5 +575,5 @@ function renderEnding() {
   }
 }
 
-// 啟動
+// 啟動程式
 renderEraSelect();
