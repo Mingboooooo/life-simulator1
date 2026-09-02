@@ -8,7 +8,6 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* 最外層環境背景 */
 body {
   font-family: 'Zen Maru Gothic', 'DotGothic16', sans-serif;
   color: #2c2f35;
@@ -22,22 +21,10 @@ body {
 }
 
 /* 四季背景 */
-body.bg-spring {
-  background-color: #f7ecef;
-  background-image: radial-gradient(circle at 50% 20%, rgba(255, 230, 235, 0.8), transparent 60%), linear-gradient(135deg, #fff0f3 0%, #f3e1e6 100%);
-}
-body.bg-summer {
-  background-color: #e5efe9;
-  background-image: radial-gradient(circle at 50% 20%, rgba(230, 248, 238, 0.8), transparent 60%), linear-gradient(135deg, #eef7f2 0%, #d8eae0 100%);
-}
-body.bg-autumn {
-  background-color: #ded6c5;
-  background-image: radial-gradient(circle at 50% 20%, rgba(255, 245, 230, 0.8), transparent 60%), linear-gradient(135deg, #f5ecd8 0%, #d3c7b2 100%);
-}
-body.bg-winter {
-  background-color: #d6dde5;
-  background-image: radial-gradient(circle at 50% 20%, rgba(240, 246, 255, 0.8), transparent 60%), linear-gradient(135deg, #e5edf5 0%, #c4d0dc 100%);
-}
+body.bg-spring { background: #f7ecef linear-gradient(135deg, #fff0f3 0%, #f3e1e6 100%); }
+body.bg-summer { background: #e5efe9 linear-gradient(135deg, #eef7f2 0%, #d8eae0 100%); }
+body.bg-autumn { background: #ded6c5 linear-gradient(135deg, #f5ecd8 0%, #d3c7b2 100%); }
+body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc 100%); }
 
 /* 遊戲機本體 */
 .gameboy-chassis {
@@ -69,7 +56,6 @@ body.bg-winter {
 .battery-status { display: flex; align-items: center; gap: 8px; }
 .battery-led { width: 9px; height: 9px; border-radius: 50%; background-color: #c85a44; border: 1.5px solid currentColor; }
 .battery-text { font-size: 10px; color: #4a483e; font-weight: 700; letter-spacing: 1px; }
-.mode-badge { font-size: 11px; color: #4a483e; font-weight: 900; letter-spacing: 0.5px; }
 
 /* 液晶螢幕 */
 .screen-container {
@@ -109,7 +95,7 @@ body.bg-winter {
   padding: 10px;
   border-radius: 8px;
   border: 1.5px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .stat-box {
@@ -134,10 +120,21 @@ body.bg-winter {
   display: inline-block;
   background: rgba(0, 0, 0, 0.65);
   color: #ffffff;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: 4px;
+}
+
+.origin-badge {
+  display: inline-block;
+  background: #e9e4d6;
+  color: #555;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #d4cbb8;
 }
 
 .dialog-box {
@@ -145,7 +142,7 @@ body.bg-winter {
   border: 2px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   padding: 12px 14px;
-  font-size: 13.5px;
+  font-size: 13px;
   color: #2c2f35;
   line-height: 1.7;
   margin: 8px 0 12px 0;
@@ -159,12 +156,12 @@ body.bg-winter {
   text-align: left;
   border-radius: 8px;
   color: #2c2f35;
-  padding: 11px 13px;
-  font-size: 12.5px;
+  padding: 10px 12px;
+  font-size: 12px;
   font-family: inherit;
   font-weight: 700;
   cursor: pointer;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
   transition: all 0.08s ease;
   line-height: 1.5;
 }
@@ -172,23 +169,23 @@ body.bg-winter {
 .pixel-btn:active { transform: translateY(3px); box-shadow: 0 0 0 0 !important; }
 
 .log-scroll-area {
-  max-height: 130px;
+  max-height: 120px;
   overflow-y: auto;
-  font-size: 12px;
+  font-size: 11.5px;
   color: #555;
   background: rgba(255, 255, 255, 0.7);
-  padding: 10px;
+  padding: 8px 10px;
   border-radius: 6px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
+  margin-top: 8px;
   line-height: 1.6;
 }
 
-.log-item { border-left: 3px solid rgba(0, 0, 0, 0.3); padding-left: 8px; margin-bottom: 5px; }
+.log-item { border-left: 3px solid rgba(0, 0, 0, 0.3); padding-left: 6px; margin-bottom: 4px; }
 .game-footer {
   border-top: 2px dashed rgba(0, 0, 0, 0.15);
   padding-top: 10px;
-  margin-top: 12px;
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   font-size: 10.5px;
@@ -209,15 +206,10 @@ body.bg-winter {
 
 .hidden { display: none !important; }
 
-/* ==========================================================
-   ✨ 全螢幕爆裂抽卡沈浸特效 (FULLSCREEN GACHA OVERLAY) ✨
-========================================================== */
+/* ================= 全屏爆裂抽卡 ================= */
 .gacha-screen-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0; width: 100vw; height: 100vh;
   background: rgba(15, 12, 24, 0.94);
   backdrop-filter: blur(14px);
   z-index: 999999;
@@ -232,48 +224,27 @@ body.bg-winter {
 .gacha-title-banner {
   text-align: center;
   margin-bottom: 24px;
-  animation: bannerSlideDown 0.6s 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
 }
 
 .gacha-title-banner h2 {
-  font-size: 20px;
-  color: #f7e6c4;
-  letter-spacing: 2px;
-  text-shadow: 0 0 16px rgba(247, 230, 196, 0.6);
-  margin-bottom: 6px;
+  font-size: 20px; color: #f7e6c4; letter-spacing: 2px;
+  text-shadow: 0 0 16px rgba(247, 230, 196, 0.6); margin-bottom: 6px;
 }
 
-.gacha-title-banner p {
-  font-size: 12px;
-  color: #a89f91;
-  letter-spacing: 1px;
-}
+.gacha-title-banner p { font-size: 12px; color: #a89f91; }
 
-/* 5 張全屏卡牌陳列區 */
 .gacha-cards-stage {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  max-width: 900px;
-  width: 100%;
-  perspective: 1200px;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 16px; max-width: 900px; width: 100%; perspective: 1200px;
 }
 
-/* 單張全屏命運卡牌 */
 .gacha-card-item {
-  position: relative;
-  width: 155px;
-  height: 230px;
-  border-radius: 14px;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  position: relative; width: 155px; height: 230px; border-radius: 14px;
+  cursor: pointer; transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   animation: cardBurstOut 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-/* 5 張卡逐張爆出延遲 */
 .gacha-card-item:nth-child(1) { animation-delay: 0.15s; }
 .gacha-card-item:nth-child(2) { animation-delay: 0.25s; }
 .gacha-card-item:nth-child(3) { animation-delay: 0.35s; }
@@ -281,127 +252,53 @@ body.bg-winter {
 .gacha-card-item:nth-child(5) { animation-delay: 0.55s; }
 
 .gacha-card-inner {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 14px;
-  background: #252230;
-  border: 2px solid #544b68;
-  padding: 14px 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  position: absolute; width: 100%; height: 100%; border-radius: 14px;
+  background: #252230; border: 2px solid #544b68; padding: 14px 12px;
+  display: flex; flex-direction: column; justify-content: space-between;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
 }
 
-.gacha-card-item:hover {
-  transform: translateY(-8px) scale(1.04);
-}
-
-.gacha-card-item:hover .gacha-card-inner {
-  border-color: #ffd166;
-  box-shadow: 0 0 20px rgba(255, 209, 102, 0.4);
-}
-
-/* 選中狀態：發出華麗金光 */
-.gacha-card-item.selected {
-  transform: translateY(-12px) scale(1.08);
-}
-
+.gacha-card-item:hover { transform: translateY(-8px) scale(1.04); }
+.gacha-card-item.selected { transform: translateY(-12px) scale(1.08); }
 .gacha-card-item.selected .gacha-card-inner {
-  background: #342838;
-  border: 2.5px solid #ff758f;
-  box-shadow: 0 0 25px rgba(255, 117, 143, 0.7), 0 0 50px rgba(255, 117, 143, 0.3);
+  background: #342838; border: 2.5px solid #ff758f;
+  box-shadow: 0 0 25px rgba(255, 117, 143, 0.7);
 }
 
-.gacha-card-icon {
-  font-size: 34px;
-  text-align: center;
-  margin-top: 8px;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
-}
-
-.gacha-card-name {
-  font-size: 14px;
-  font-weight: 900;
-  color: #fff;
-  text-align: center;
-  letter-spacing: 1px;
-}
-
-.gacha-card-desc {
-  font-size: 10.5px;
-  color: #c9c3b8;
-  line-height: 1.45;
-  text-align: center;
-}
-
+.gacha-card-icon { font-size: 34px; text-align: center; }
+.gacha-card-name { font-size: 14px; font-weight: 900; color: #fff; text-align: center; }
+.gacha-card-desc { font-size: 10.5px; color: #c9c3b8; line-height: 1.45; text-align: center; }
 .gacha-card-status {
-  font-size: 10px;
-  text-align: center;
-  font-weight: bold;
-  color: #8c829e;
-  letter-spacing: 0.5px;
-  border-top: 1px dashed rgba(255, 255, 255, 0.15);
-  padding-top: 6px;
+  font-size: 10px; text-align: center; font-weight: bold; color: #8c829e;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 6px;
 }
+.gacha-card-item.selected .gacha-card-status { color: #ff758f; }
 
-.gacha-card-item.selected .gacha-card-status {
-  color: #ff758f;
-}
-
-/* 底部確定按鈕 */
 .gacha-confirm-btn {
-  margin-top: 26px;
-  background: #f7e6c4;
-  color: #211c2e;
-  border: none;
-  border-radius: 25px;
-  padding: 12px 36px;
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
-  transition: all 0.2s ease;
-  animation: bannerSlideDown 0.6s 0.6s both;
+  margin-top: 24px; background: #f7e6c4; color: #211c2e; border: none;
+  border-radius: 25px; padding: 12px 36px; font-size: 13px; font-weight: 900;
+  cursor: pointer; box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
 }
 
-.gacha-confirm-btn:hover {
-  background: #ffffff;
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+/* ================= 🏆 人生紀念冊 (圖鑑庫) ================= */
+.hall-of-fame-modal {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
+  z-index: 9999999; display: flex; align-items: center; justify-content: center; padding: 16px;
 }
 
-.gacha-confirm-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+.hof-card-box {
+  background: #ece8df; border: 4px solid #4a483e; border-radius: 18px;
+  max-width: 480px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 20px;
 }
 
-/* 動畫序列 */
-@keyframes overlayDimIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.hof-item {
+  background: #ffffff; border: 2px solid #d4cbb8; border-radius: 10px;
+  padding: 10px 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px;
 }
 
-@keyframes bannerSlideDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
+@keyframes overlayDimIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes cardBurstOut {
-  0% {
-    opacity: 0;
-    transform: scale(0.2) rotateY(180deg) translateY(200px);
-  }
-  70% {
-    transform: scale(1.1) rotateY(10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotateY(0deg) translateY(0);
-  }
+  0% { opacity: 0; transform: scale(0.2) rotateY(180deg) translateY(200px); }
+  100% { opacity: 1; transform: scale(1) rotateY(0deg) translateY(0); }
 }
