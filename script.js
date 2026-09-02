@@ -774,7 +774,7 @@ function startCountryRouletteAnimation() {
   flashStep();
 }
 
-// 3D 爆裂抽天賦卡
+// 3D 爆裂抽天賦卡（手機完美兼容版）
 function triggerFullscreenGacha() {
   const shuffled = [...allPerks].sort(() => 0.5 - Math.random());
   state.drawnPerks = shuffled.slice(0, 5);
@@ -802,10 +802,10 @@ function triggerFullscreenGacha() {
   });
 
   overlay.innerHTML = `
-    <div style="text-align: center; margin-bottom: 18px;">
-      <h2 style="font-size: 20px; color: #f7e6c4; letter-spacing: 2px;">✦ 挑選你的天賦神力 ✦</h2>
-      <p style="font-size: 11.5px; color: #a89f91; margin-top: 4px; display:flex; align-items:center; justify-content:center;">
-        出生於: <img src="${state.birthCountry.flagUrl}" class="flag-img-small" style="margin-left:6px;"> ${state.birthCountry.name} · ${state.familyBackground.name}
+    <div class="gacha-title-banner">
+      <h2 style="font-size: 18px; color: #f7e6c4; letter-spacing: 2px; margin-bottom:4px;">✦ 挑選你的天賦神力 ✦</h2>
+      <p style="font-size: 11px; color: #a89f91; display:flex; align-items:center; justify-content:center;">
+        出生於: <img src="${state.birthCountry.flagUrl}" class="flag-img-small" style="margin-left:4px;"> ${state.birthCountry.name} · ${state.familyBackground.name}
       </p>
     </div>
     <div class="gacha-cards-stage">
@@ -862,7 +862,7 @@ function startLifeSimulation() {
     }
   }
 
-  state.logs = [`【2000年 0歲】你降生於【${state.birthCountry.name}】的【${state.familyBackground.name}】，天賦為【${perk ? perk.name : ''}】。`];
+  state.logs = [`【2000年 0歲】你降生於【${state.birthCountry.name}】的【${state.familyBackground.name}】家庭，天賦為【${perk ? perk.name : ''}】。`];
   
   const currentTimeline = nationTimelines[state.birthCountry.timelineId];
   state.currentEventId = currentTimeline.startEvent;
@@ -1020,7 +1020,6 @@ function renderPrematureDeath() {
     desc: deathReason
   });
 
-  // 彈出榮譽終章結算證書彈窗
   showEndingCertificateModal(badgeInfo, deathReason, true);
 }
 
