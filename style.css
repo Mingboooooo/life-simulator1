@@ -20,13 +20,13 @@ body {
   transition: background 1.2s ease-in-out;
 }
 
-/* 四季背景 */
+/* 四季動態背景光暈 */
 body.bg-spring { background: #f7ecef linear-gradient(135deg, #fff0f3 0%, #f3e1e6 100%); }
 body.bg-summer { background: #e5efe9 linear-gradient(135deg, #eef7f2 0%, #d8eae0 100%); }
 body.bg-autumn { background: #ded6c5 linear-gradient(135deg, #f5ecd8 0%, #d3c7b2 100%); }
 body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc 100%); }
 
-/* 掌機外殼 */
+/* 掌機本體外殼 */
 .gameboy-chassis {
   position: relative;
   width: 100%;
@@ -56,8 +56,9 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 .battery-status { display: flex; align-items: center; gap: 8px; }
 .battery-led { width: 9px; height: 9px; border-radius: 50%; background-color: #c85a44; border: 1.5px solid currentColor; }
 .battery-text { font-size: 10px; color: #4a483e; font-weight: 700; letter-spacing: 1px; }
+.mode-badge { font-size: 11px; color: #4a483e; font-weight: 900; letter-spacing: 0.5px; }
 
-/* 液晶螢幕 */
+/* 液晶螢幕內部 */
 .screen-container {
   position: relative;
   background: #fbf9f4;
@@ -171,6 +172,7 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 }
 
 .log-item { border-left: 3px solid rgba(0, 0, 0, 0.3); padding-left: 6px; margin-bottom: 4px; }
+
 .game-footer {
   border-top: 2px dashed rgba(0, 0, 0, 0.15);
   padding-top: 10px;
@@ -184,7 +186,7 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 
 .hidden { display: none !important; }
 
-/* 國旗圖像樣式 */
+/* 國旗圖像 */
 .flag-img {
   width: 38px;
   height: 26px;
@@ -246,7 +248,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
 .country-box .name { font-size: 13.5px; font-weight: 900; color: #ffffff; }
 .country-box .desc { font-size: 10px; color: #a89f91; margin-top: 4px; line-height: 1.35; }
 
-/* 閃爍中 */
 .country-box.active-flash {
   opacity: 1 !important;
   border-color: #ffd166 !important;
@@ -255,7 +256,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   box-shadow: 0 0 20px rgba(255, 209, 102, 0.6);
 }
 
-/* 最終鎖定定格（單一獨佔） */
 .country-box.final-locked {
   opacity: 1 !important;
   border: 3px solid #ff758f !important;
@@ -338,9 +338,7 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   cursor: pointer; box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
 }
 
-/* ==========================================================
-   🚨 重大歷史事件 / 危機飛入衝擊動畫（飛出並震動 Hold 住）
-========================================================== */
+/* ================= 歷史重大危機飛入衝擊動畫 ================= */
 .crisis-modal-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -364,7 +362,6 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   text-align: center;
   color: #fff;
   box-shadow: 0 0 50px rgba(255, 51, 75, 0.6), inset 0 0 20px rgba(255, 51, 75, 0.3);
-  /* 瞬間由螢幕深處向前暴衝飛出 */
   animation: crisisCardFlyIn 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) both, crisisHeartbeat 1.5s 0.6s infinite ease-in-out;
 }
 
@@ -426,7 +423,7 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   background: #ff4d63;
 }
 
-/* 紀念冊 */
+/* 人生圖鑑紀念冊 */
 .hall-of-fame-modal {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
@@ -443,34 +440,20 @@ body.bg-winter { background: #d6dde5 linear-gradient(135deg, #e5edf5 0%, #c4d0dc
   padding: 10px 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px;
 }
 
-/* 動畫設定 */
 @keyframes overlayDimIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes cardBurstOut {
   0% { opacity: 0; transform: scale(0.2) rotateY(180deg) translateY(200px); }
   100% { opacity: 1; transform: scale(1) rotateY(0deg) translateY(0); }
 }
 
-@keyframes crisisBgFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes crisisBgFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* 卡片飛入特效 */
 @keyframes crisisCardFlyIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.1) translateY(120px) rotate(-4deg);
-  }
-  75% {
-    transform: scale(1.06) translateY(-8px) rotate(1deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0) rotate(0deg);
-  }
+  0% { opacity: 0; transform: scale(0.1) translateY(120px) rotate(-4deg); }
+  75% { transform: scale(1.06) translateY(-8px) rotate(1deg); }
+  100% { opacity: 1; transform: scale(1) rotateY(0deg) translateY(0); }
 }
 
-/* Hold 住時的心跳脈衝效果 */
 @keyframes crisisHeartbeat {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.02); }
