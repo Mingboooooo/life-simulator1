@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+TC:wght@500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=DotGothic16&display=swap');
 
 * {
   box-sizing: border-box;
@@ -9,45 +9,42 @@
 }
 
 body {
-  /* 高清晰度中文字體搭配 Y2K 科技感英文字體 */
-  font-family: 'Chakra Petch', 'Noto Sans TC', sans-serif;
-  background-color: #0b061a;
+  /* 日系溫潤圓體與點陣字體搭配 */
+  font-family: 'Zen Maru Gothic', 'DotGothic16', sans-serif;
+  background-color: #1e222d;
   background-image: 
-    radial-gradient(circle at 50% 20%, rgba(236, 72, 153, 0.25), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.2), transparent 40%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 24px 24px, 24px 24px;
-  color: #ffffff;
+    radial-gradient(circle at 50% 15%, rgba(240, 235, 225, 0.08), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 3px);
+  color: #2b2e38;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
+  transition: background 0.8s ease;
 }
 
-/* Y2K 透明果凍感外殼 (iMac G3 / GBA 透紫風格) */
+/* 復古日系米白色掌機機身 (90-00s 日本任天堂/WonderSwan 啞光磨砂感) */
 .gameboy-chassis {
   position: relative;
   width: 100%;
   max-width: 440px;
-  background: rgba(36, 17, 68, 0.85);
-  backdrop-filter: blur(12px);
-  padding: 16px;
-  border-radius: 24px;
-  border: 3px solid #00ffff;
+  background: #ece8df;
+  padding: 18px;
+  border-radius: 20px;
+  border: 4px solid #363b47;
   box-shadow: 
-    0 0 20px rgba(0, 255, 255, 0.35),
-    0 16px 0 0 #12072b,
-    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+    0 12px 0 0 #20242e,
+    0 20px 25px rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* 頂部訊號燈與電量裝飾 */
+/* 機身頂部：電源燈與音響透氣孔裝飾 */
 .chassis-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4px 10px 4px;
+  padding: 0 4px 12px 4px;
 }
 
 .battery-status {
@@ -57,78 +54,91 @@ body {
 }
 
 .battery-led {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background-color: #ff007f;
-  border: 1px solid #ffffff;
-  box-shadow: 0 0 8px #ff007f;
-  animation: pulseNeon 1.5s infinite;
+  background-color: #e06c53;
+  border: 1.5px solid #363b47;
 }
 
 .battery-text {
-  font-size: 11px;
-  color: #00ffff;
-  letter-spacing: 1.5px;
+  font-size: 10px;
+  color: #6d7382;
   font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .mode-badge {
   font-size: 11px;
-  color: #ff00e5;
+  color: #4a5568;
   font-weight: 900;
-  letter-spacing: 1px;
-  text-shadow: 0 0 8px rgba(255, 0, 229, 0.6);
+  letter-spacing: 0.5px;
 }
 
-/* 液晶內螢幕（高清晰亮彩版） */
+/* 螢幕外框與日系高解析度內液晶 */
 .screen-container {
   position: relative;
-  background: linear-gradient(180deg, #13092c 0%, #0d061f 100%);
-  border: 3px solid #ff00e5;
+  background: #fdfbf7;
+  border: 3px solid #363b47;
   padding: 16px;
-  border-radius: 12px;
+  border-radius: 10px;
   min-height: 560px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #f8fafc;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.6s ease;
+}
+
+/* === 動態季節光暈氛圍 (由 JS 動態切換 class) === */
+.season-spring {
+  background: linear-gradient(180deg, #fff7f9 0%, #fdfbf7 100%);
+  border-color: #d898a8;
+}
+.season-summer {
+  background: linear-gradient(180deg, #f4faf6 0%, #fdfbf7 100%);
+  border-color: #78a890;
+}
+.season-autumn {
+  background: linear-gradient(180deg, #fcf7ed 0%, #fdfbf7 100%);
+  border-color: #c98a58;
+}
+.season-winter {
+  background: linear-gradient(180deg, #f2f7fc 0%, #fdfbf7 100%);
+  border-color: #7b9ab8;
 }
 
 /* 標題欄 */
 .game-header {
-  border-bottom: 2px dashed #00ffff;
+  border-bottom: 2px dashed #d1cbbd;
   padding-bottom: 8px;
   margin-bottom: 12px;
   text-align: center;
 }
 
 .game-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 900;
-  color: #00ffff;
-  letter-spacing: 1.5px;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  color: #2d3748;
+  letter-spacing: 1px;
 }
 
 .sub-header {
   font-size: 11px;
-  color: #f472b6;
+  color: #718096;
   margin-top: 4px;
   font-weight: 700;
-  letter-spacing: 1px;
 }
 
-/* 5 大數值面板（高對比亮色膠囊風格） */
+/* 5 大數值面板（日系低飽和文青色板） */
 .stats-panel {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #f3eee3;
   padding: 10px;
-  border-radius: 10px;
-  border: 2px solid #7928ca;
+  border-radius: 8px;
+  border: 2px solid #dfd8c8;
   margin-bottom: 12px;
 }
 
@@ -136,119 +146,117 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1e1138;
+  background: #ffffff;
   padding: 6px 10px;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  font-size: 13px;
+  border: 1px solid #d8d1c0;
+  font-size: 12px;
   font-weight: 700;
 }
 
-.stat-physique { color: #ff3366; }
-.stat-intellect { color: #00f0ff; }
-.stat-charm { color: #ff00e5; }
-.stat-happiness { color: #00ff88; }
-.stat-val { font-weight: 900; color: #ffffff; font-size: 14px; }
+.stat-physique { color: #d96b52; }  /* 絳紅 */
+.stat-intellect { color: #437f97; } /* 藍灰 */
+.stat-charm { color: #b86b88; }     /* 櫻木 */
+.stat-happiness { color: #5a9367; } /* 若竹綠 */
+.stat-val { font-weight: 900; color: #2d3748; }
 
 /* 標籤徽章 */
 .tag-badge {
   display: inline-block;
-  background: #ff007f;
+  background: #4a5568;
   color: #ffffff;
-  font-size: 11px;
-  font-weight: 900;
+  font-size: 10px;
+  font-weight: 700;
   padding: 3px 8px;
   border-radius: 4px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 0 6px rgba(255, 0, 127, 0.5);
 }
 
-/* 劇情對話框（高清晰文字排版） */
+/* 季節心情氛圍小標籤 */
+.season-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 12px;
+  border: 1px solid currentColor;
+}
+
+/* 日式白底對話框 */
 .dialog-box {
-  background: rgba(22, 12, 45, 0.95);
-  border: 2px solid #00f0ff;
+  background: #ffffff;
+  border: 2px solid #dcd5c5;
   border-radius: 8px;
-  padding: 12px;
-  font-size: 14px;
-  color: #f1f5f9;
-  line-height: 1.65;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  color: #2d3748;
+  line-height: 1.7;
   margin: 8px 0 12px 0;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
 }
 
-/* Y2K 亮面按鈕（立體壓感手感） */
+/* 復古立體溫潤按鈕 */
 .pixel-btn {
   position: relative;
   display: block;
   width: 100%;
   text-align: left;
-  border: 2px solid #ffffff;
+  border: 2px solid #4a5568;
   border-radius: 8px;
-  background: linear-gradient(180deg, #2d1654 0%, #170933 100%);
-  color: #ffffff;
-  padding: 12px 14px;
-  font-size: 13px;
+  background: #ffffff;
+  color: #2d3748;
+  padding: 11px 13px;
+  font-size: 12.5px;
   font-family: inherit;
   font-weight: 700;
   cursor: pointer;
-  margin-bottom: 9px;
-  box-shadow: 
-    0 4px 0 0 #00ffff,
-    0 6px 12px rgba(0, 0, 0, 0.5);
-  transition: all 0.1s ease;
+  margin-bottom: 8px;
+  box-shadow: 0 3px 0 0 #4a5568;
+  transition: all 0.08s ease;
   line-height: 1.5;
 }
 
 .pixel-btn:hover {
-  background: linear-gradient(180deg, #441e82 0%, #250e52 100%);
-  border-color: #00ffff;
-  color: #00ffff;
+  background: #f7f5f0;
   transform: translateY(-1px);
 }
 
 .pixel-btn:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 0 #00ffff;
+  transform: translateY(3px);
+  box-shadow: 0 0 0 0 #4a5568;
 }
 
-/* 歷史記錄軌跡框 */
+/* 歷史回顧滑動區 */
 .log-scroll-area {
   max-height: 130px;
   overflow-y: auto;
   font-size: 12px;
-  color: #cbd5e1;
-  background: #110724;
+  color: #4a5568;
+  background: #fbf9f4;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #7928ca;
+  border: 1px solid #dcd5c5;
   margin-top: 10px;
   line-height: 1.6;
 }
 
 .log-item {
-  border-left: 3px solid #ff00e5;
+  border-left: 3px solid #b8a898;
   padding-left: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
-/* 底部操作提示 */
+/* 底部操作條 */
 .game-footer {
-  border-top: 2px dashed #00ffff;
+  border-top: 2px dashed #d1cbbd;
   padding-top: 10px;
   margin-top: 12px;
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  color: #00ffff;
-  letter-spacing: 0.5px;
+  color: #718096;
 }
 
 .hidden {
   display: none !important;
-}
-
-@keyframes pulseNeon {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.9); }
 }
