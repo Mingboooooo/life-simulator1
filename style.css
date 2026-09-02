@@ -8,38 +8,57 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* 最外層環境背景：日系暖木、燕麥紙質手感，告別死黑 */
+/* 最外層環境背景 */
 body {
   font-family: 'Zen Maru Gothic', 'DotGothic16', sans-serif;
-  background-color: #d8d2c4;
-  background-image: 
-    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.4), transparent 60%),
-    radial-gradient(circle at 20% 80%, rgba(184, 172, 154, 0.3), transparent 50%),
-    linear-gradient(135deg, rgba(245, 240, 230, 0.6) 0%, rgba(216, 210, 196, 0.9) 100%);
   color: #2c2f35;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
+  overflow-x: hidden;
+  transition: background 1.2s ease-in-out;
 }
 
-/* 遊戲機本體：低飽和燕麥灰褐 + 橄欖墨綠日系配色 */
+/* 四季背景 */
+body.bg-spring {
+  background-color: #f7ecef;
+  background-image: radial-gradient(circle at 50% 20%, rgba(255, 230, 235, 0.8), transparent 60%), linear-gradient(135deg, #fff0f3 0%, #f3e1e6 100%);
+}
+body.bg-summer {
+  background-color: #e5efe9;
+  background-image: radial-gradient(circle at 50% 20%, rgba(230, 248, 238, 0.8), transparent 60%), linear-gradient(135deg, #eef7f2 0%, #d8eae0 100%);
+}
+body.bg-autumn {
+  background-color: #ded6c5;
+  background-image: radial-gradient(circle at 50% 20%, rgba(255, 245, 230, 0.8), transparent 60%), linear-gradient(135deg, #f5ecd8 0%, #d3c7b2 100%);
+}
+body.bg-winter {
+  background-color: #d6dde5;
+  background-image: radial-gradient(circle at 50% 20%, rgba(240, 246, 255, 0.8), transparent 60%), linear-gradient(135deg, #e5edf5 0%, #c4d0dc 100%);
+}
+
+/* 遊戲機本體 */
 .gameboy-chassis {
   position: relative;
   width: 100%;
   max-width: 440px;
-  background: #bfb7a6; /* 燕麥灰褐，帶厚度質感 */
   padding: 18px;
   border-radius: 22px;
-  border: 4px solid #4a483e; /* 炭深灰褐外框 */
-  box-shadow: 
-    0 14px 0 0 #3a372f,
-    0 22px 30px rgba(45, 40, 30, 0.25),
-    inset 0 2px 3px rgba(255, 255, 255, 0.45);
+  box-shadow: 0 14px 0 0 rgba(0, 0, 0, 0.18), 0 22px 30px rgba(0, 0, 0, 0.18);
+  transition: all 1.2s ease-in-out;
 }
 
-/* 機身頂部飾條 */
+.chassis-spring { background: #f2e4e6; border: 4px solid #9c6c74; }
+.chassis-spring .pixel-btn { background: #fff9fa; border-color: #9c6c74; box-shadow: 0 3px 0 0 #9c6c74; }
+.chassis-summer { background: #d6e2d8; border: 4px solid #4a6850; }
+.chassis-summer .pixel-btn { background: #f4faf6; border-color: #4a6850; box-shadow: 0 3px 0 0 #4a6850; }
+.chassis-autumn { background: #bfb7a6; border: 4px solid #4a483e; }
+.chassis-autumn .pixel-btn { background: #f4f0e6; border-color: #4a483e; box-shadow: 0 3px 0 0 #4a483e; }
+.chassis-winter { background: #bcc8d4; border: 4px solid #465563; }
+.chassis-winter .pixel-btn { background: #f2f7fa; border-color: #465563; box-shadow: 0 3px 0 0 #465563; }
+
 .chassis-header {
   display: flex;
   align-items: center;
@@ -47,98 +66,49 @@ body {
   padding: 0 4px 12px 4px;
 }
 
-.battery-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.battery-status { display: flex; align-items: center; gap: 8px; }
+.battery-led { width: 9px; height: 9px; border-radius: 50%; background-color: #c85a44; border: 1.5px solid currentColor; }
+.battery-text { font-size: 10px; color: #4a483e; font-weight: 700; letter-spacing: 1px; }
+.mode-badge { font-size: 11px; color: #4a483e; font-weight: 900; letter-spacing: 0.5px; }
 
-.battery-led {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background-color: #c85a44;
-  border: 1.5px solid #4a483e;
-}
-
-.battery-text {
-  font-size: 10px;
-  color: #595547;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.mode-badge {
-  font-size: 11px;
-  color: #4a483e;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-}
-
-/* 液晶內螢幕（清爽護眼柔光和紙感） */
+/* 液晶螢幕 */
 .screen-container {
   position: relative;
   background: #fbf9f4;
-  border: 3px solid #4a483e;
+  border: 3px solid currentColor;
   padding: 16px;
   border-radius: 12px;
   min-height: 560px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.06);
-  transition: background 0.6s ease, border-color 0.6s ease;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05);
+  transition: all 1s ease-in-out;
 }
 
-/* === 四季動態微光 === */
-.season-spring {
-  background: linear-gradient(180deg, #fff5f6 0%, #fbf9f4 100%);
-  border-color: #c98094;
-}
-.season-summer {
-  background: linear-gradient(180deg, #f2f8f4 0%, #fbf9f4 100%);
-  border-color: #5e8c74;
-}
-.season-autumn {
-  background: linear-gradient(180deg, #fcf5ea 0%, #fbf9f4 100%);
-  border-color: #b57a46;
-}
-.season-winter {
-  background: linear-gradient(180deg, #f0f5fa 0%, #fbf9f4 100%);
-  border-color: #6e8fae;
-}
+.screen-spring { background: linear-gradient(180deg, #fff3f5 0%, #fbf9f4 100%); }
+.screen-summer { background: linear-gradient(180deg, #eff9f3 0%, #fbf9f4 100%); }
+.screen-autumn { background: linear-gradient(180deg, #fbf4e8 0%, #fbf9f4 100%); }
+.screen-winter { background: linear-gradient(180deg, #edf5fc 0%, #fbf9f4 100%); }
 
-/* 標題欄 */
 .game-header {
-  border-bottom: 2px dashed #cfc7b4;
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.15);
   padding-bottom: 8px;
   margin-bottom: 12px;
   text-align: center;
 }
 
-.game-title {
-  font-size: 16px;
-  font-weight: 900;
-  color: #3b3930;
-  letter-spacing: 1px;
-}
+.game-title { font-size: 16px; font-weight: 900; letter-spacing: 1px; }
+.sub-header { font-size: 11px; color: #666; margin-top: 4px; font-weight: 700; }
 
-.sub-header {
-  font-size: 11px;
-  color: #706b5d;
-  margin-top: 4px;
-  font-weight: 700;
-}
-
-/* 數值面板：大地麻布色塊與清晰卡片 */
 .stats-panel {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  background: #ebe5d7;
+  background: rgba(0, 0, 0, 0.04);
   padding: 10px;
   border-radius: 8px;
-  border: 2px solid #d4cbb8;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 12px;
 }
 
@@ -146,24 +116,23 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fbf9f4;
+  background: #ffffff;
   padding: 6px 10px;
   border-radius: 6px;
-  border: 1px solid #cfc7b4;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 12px;
   font-weight: 700;
 }
 
-.stat-physique { color: #c4573f; }  /* 陶土紅 */
-.stat-intellect { color: #3c7287; } /* 黛藍 */
-.stat-charm { color: #a45a75; }     /* 枯野櫻 */
-.stat-happiness { color: #4e805a; } /* 苔綠 */
-.stat-val { font-weight: 900; color: #3b3930; }
+.stat-physique { color: #c4573f; }
+.stat-intellect { color: #3c7287; }
+.stat-charm { color: #a45a75; }
+.stat-happiness { color: #4e805a; }
+.stat-val { font-weight: 900; color: #2c2f35; }
 
-/* 標籤小徽章 */
 .tag-badge {
   display: inline-block;
-  background: #595547;
+  background: rgba(0, 0, 0, 0.65);
   color: #ffffff;
   font-size: 10.5px;
   font-weight: 700;
@@ -171,92 +140,268 @@ body {
   border-radius: 4px;
 }
 
-/* 季節小圓標 */
-.season-tag {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 900;
-  padding: 2px 8px;
-  border-radius: 12px;
-  border: 1px solid currentColor;
-}
-
-/* 對話與事件內容區 */
 .dialog-box {
   background: #ffffff;
-  border: 2px solid #d4cbb8;
+  border: 2px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   padding: 12px 14px;
   font-size: 13.5px;
-  color: #3b3930;
+  color: #2c2f35;
   line-height: 1.7;
   margin: 8px 0 12px 0;
-  box-shadow: 0 2px 5px rgba(50, 45, 35, 0.04);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
 }
 
-/* 復古立體按鈕：耐看的森林橄欖微深色底 + 實體按壓反饋 */
 .pixel-btn {
   position: relative;
   display: block;
   width: 100%;
   text-align: left;
-  border: 2px solid #4a483e;
   border-radius: 8px;
-  background: #f4f0e6;
-  color: #3b3930;
+  color: #2c2f35;
   padding: 11px 13px;
   font-size: 12.5px;
   font-family: inherit;
   font-weight: 700;
   cursor: pointer;
   margin-bottom: 8px;
-  box-shadow: 0 3px 0 0 #4a483e;
   transition: all 0.08s ease;
   line-height: 1.5;
 }
 
-.pixel-btn:hover {
-  background: #ebe4d3;
-  transform: translateY(-1px);
-}
+.pixel-btn:active { transform: translateY(3px); box-shadow: 0 0 0 0 !important; }
 
-.pixel-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 0 0 0 #4a483e;
-}
-
-/* 軌跡記錄框 */
 .log-scroll-area {
   max-height: 130px;
   overflow-y: auto;
   font-size: 12px;
-  color: #595547;
-  background: #f4f0e6;
+  color: #555;
+  background: rgba(255, 255, 255, 0.7);
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #d4cbb8;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   margin-top: 10px;
   line-height: 1.6;
 }
 
-.log-item {
-  border-left: 3px solid #8e8876;
-  padding-left: 8px;
-  margin-bottom: 5px;
-}
-
-/* 底部操作條 */
+.log-item { border-left: 3px solid rgba(0, 0, 0, 0.3); padding-left: 8px; margin-bottom: 5px; }
 .game-footer {
-  border-top: 2px dashed #cfc7b4;
+  border-top: 2px dashed rgba(0, 0, 0, 0.15);
   padding-top: 10px;
   margin-top: 12px;
   display: flex;
   justify-content: space-between;
   font-size: 10.5px;
   font-weight: 700;
-  color: #706b5d;
+  color: #666;
 }
 
-.hidden {
-  display: none !important;
+.locked-opt-compact {
+  font-size: 11px;
+  color: #a09a8e;
+  border: 1px dashed #cfc7b4 !important;
+  background: rgba(0, 0, 0, 0.02) !important;
+  padding: 6px 10px !important;
+  margin-bottom: 6px !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.hidden { display: none !important; }
+
+/* ==========================================================
+   ✨ 全螢幕爆裂抽卡沈浸特效 (FULLSCREEN GACHA OVERLAY) ✨
+========================================================== */
+.gacha-screen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 12, 24, 0.94);
+  backdrop-filter: blur(14px);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: overlayDimIn 0.5s ease forwards;
+}
+
+.gacha-title-banner {
+  text-align: center;
+  margin-bottom: 24px;
+  animation: bannerSlideDown 0.6s 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+}
+
+.gacha-title-banner h2 {
+  font-size: 20px;
+  color: #f7e6c4;
+  letter-spacing: 2px;
+  text-shadow: 0 0 16px rgba(247, 230, 196, 0.6);
+  margin-bottom: 6px;
+}
+
+.gacha-title-banner p {
+  font-size: 12px;
+  color: #a89f91;
+  letter-spacing: 1px;
+}
+
+/* 5 張全屏卡牌陳列區 */
+.gacha-cards-stage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  max-width: 900px;
+  width: 100%;
+  perspective: 1200px;
+}
+
+/* 單張全屏命運卡牌 */
+.gacha-card-item {
+  position: relative;
+  width: 155px;
+  height: 230px;
+  border-radius: 14px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  animation: cardBurstOut 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+/* 5 張卡逐張爆出延遲 */
+.gacha-card-item:nth-child(1) { animation-delay: 0.15s; }
+.gacha-card-item:nth-child(2) { animation-delay: 0.25s; }
+.gacha-card-item:nth-child(3) { animation-delay: 0.35s; }
+.gacha-card-item:nth-child(4) { animation-delay: 0.45s; }
+.gacha-card-item:nth-child(5) { animation-delay: 0.55s; }
+
+.gacha-card-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: #252230;
+  border: 2px solid #544b68;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.gacha-card-item:hover {
+  transform: translateY(-8px) scale(1.04);
+}
+
+.gacha-card-item:hover .gacha-card-inner {
+  border-color: #ffd166;
+  box-shadow: 0 0 20px rgba(255, 209, 102, 0.4);
+}
+
+/* 選中狀態：發出華麗金光 */
+.gacha-card-item.selected {
+  transform: translateY(-12px) scale(1.08);
+}
+
+.gacha-card-item.selected .gacha-card-inner {
+  background: #342838;
+  border: 2.5px solid #ff758f;
+  box-shadow: 0 0 25px rgba(255, 117, 143, 0.7), 0 0 50px rgba(255, 117, 143, 0.3);
+}
+
+.gacha-card-icon {
+  font-size: 34px;
+  text-align: center;
+  margin-top: 8px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+.gacha-card-name {
+  font-size: 14px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.gacha-card-desc {
+  font-size: 10.5px;
+  color: #c9c3b8;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.gacha-card-status {
+  font-size: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #8c829e;
+  letter-spacing: 0.5px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-top: 6px;
+}
+
+.gacha-card-item.selected .gacha-card-status {
+  color: #ff758f;
+}
+
+/* 底部確定按鈕 */
+.gacha-confirm-btn {
+  margin-top: 26px;
+  background: #f7e6c4;
+  color: #211c2e;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 36px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(247, 230, 196, 0.4);
+  transition: all 0.2s ease;
+  animation: bannerSlideDown 0.6s 0.6s both;
+}
+
+.gacha-confirm-btn:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+}
+
+.gacha-confirm-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 動畫序列 */
+@keyframes overlayDimIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bannerSlideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardBurstOut {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotateY(180deg) translateY(200px);
+  }
+  70% {
+    transform: scale(1.1) rotateY(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg) translateY(0);
+  }
 }
